@@ -1,0 +1,14 @@
+.brand{
+    background: #7A4C43 !important;
+}
+
+.brand-text{
+    color: #7A4C43 !important;
+}
+
+.icon img{
+    width: 300px;
+    height: auto;
+    margin: 20px auto;
+    padding: 10px;
+}

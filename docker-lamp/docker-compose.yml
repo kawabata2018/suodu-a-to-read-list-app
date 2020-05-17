@@ -1,0 +1,39 @@
+version: "3.7"
+
+volumes:
+  db-store:
+
+services:
+  app:
+    build: ./docker/php
+    links:
+      - db
+    ports:
+      - 10080:80
+    volumes:
+      - ../src:/var/www/html
+      - ./docker/logs:/var/log/apache2
+      - ./docker/php/bash/.bash_history:/root/.bash_history
+      - ./docker/php/bash/psysh:/root/.config/psysh
+
+  db:
+    build: ./docker/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./docker/logs:/var/log/mysql
+    ports:
+      - 3306:3306
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=phper
+      - PMA_PASSWORD=secret
+    links:
+      - db
+    ports:
+      - 20080:80
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions

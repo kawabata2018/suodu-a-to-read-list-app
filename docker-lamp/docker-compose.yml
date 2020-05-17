@@ -21,6 +21,7 @@ services:
     volumes:
       - db-store:/var/lib/mysql
       - ./docker/logs:/var/log/mysql
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
   

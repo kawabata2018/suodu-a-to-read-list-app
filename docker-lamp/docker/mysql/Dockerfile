@@ -7,3 +7,4 @@ ENV TZ=UTC \
   MYSQL_PASSWORD=secret
 
 COPY ./my.cnf /etc/my.cnf
+

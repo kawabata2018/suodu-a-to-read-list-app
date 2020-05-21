@@ -1,12 +1,32 @@
-.brand{
+.bg-book {
+    background: #F5F2ED;
+}
+
+.bg-green-login {
+    background: #86C215;
+}
+
+.bg-red-login {
+    background: #D65940;
+}
+
+.bg-beige-login {
+    background: #D9CFBA;
+}
+
+.border-login {
+    border: 1px solid #7A4C43;
+}
+
+.brand {
     background: #7A4C43 !important;
 }
 
-.brand-text{
+.brand-text {
     color: #7A4C43 !important;
 }
 
-.icon img{
+.icon img {
     width: 300px;
     height: auto;
     margin: 20px auto;

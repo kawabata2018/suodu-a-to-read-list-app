@@ -6,12 +6,14 @@ class User {
     private $password;
     private $profile;
     private $iconPath;
-    private $createdAt;
-    private $isProtected;
-    private $deleteFlag;
+    private $createdAt;         // timestamp
+    private $isProtected;       // boolean
+    private $deleteFlag;        // boolean
 
     // constructor
-    public function __construct($userId, $password){
+    public function __construct(){
+    }
+    public function __constructIP($userId, $password){
         $this->userId = $userId;
         $this->password = $password;
     }
@@ -21,7 +23,7 @@ class User {
         $this->userId = $userId;
     }
     public function setUserName($userName){
-        $this->$userName = $userName;
+        $this->userName = $userName;
     }
     public function setPassword($password){
         $this->password = $password;
@@ -44,28 +46,28 @@ class User {
 
     // getters
     public function getUserId(){
-        return $userId;
+        return $this->userId;
     }
     public function getUserName(){
-        return $userName;
+        return $this->userName;
     }
     public function getPassword(){
-        return $password;
+        return $this->password;
     }
     public function getProfile(){
-        return $profile;
+        return $this->profile;
     }
     public function getIconPath(){
-        return $iconPath;
+        return $this->iconPath;
     }
     public function getCreatedAt(){
-        return $createdAt;
+        return $this->createdAt;
     }
     public function getIsProtected(){
-        return $isProtected;
+        return $this->isProtected;
     }
     public function getDeleteFlag(){
-        return $deleteFlag;
+        return $this->deleteFlag;
     }
 
 }

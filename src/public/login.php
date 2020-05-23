@@ -1,3 +1,45 @@
+<?php
+
+$id = $password = '';
+$errors = array('id'=>'', 'password'=>'');
+
+// get session values
+session_start();
+$invalidIdError = $_SESSION['invalidIdError'];
+$invalidPasswordError = $_SESSION['invalidPasswordError'];
+
+// unset session values
+unset($_SESSION['id']);
+unset($_SESSION['password']);
+unset($_SESSION['invalidIdError']);
+unset($_SESSION['invalidPasswordError']);
+
+if (isset($_POST['submit'])) {
+    // check id
+    if (empty($_POST['id'])) {
+        $errors['id'] = 'IDを入力してね';
+    } else {
+        $id = $_POST['id'];
+    }
+
+    // check password
+    if (empty($_POST['password'])) {
+        $errors['password'] = 'あいことばを入力してね';
+    } else {
+        $password = $_POST['password'];
+    }
+
+    if (! array_filter($errors)) {
+        $_SESSION['id'] = $id;
+        $_SESSION['password'] = $password;
+        // echo 'REDIRECT';
+        header('Location: /controller/Login-controller.php');
+        exit;
+    }
+}
+
+?>
+
 <?php include('templates/header.php'); ?>
 
 <div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
@@ -9,17 +51,20 @@
             </div>
             <div class="container p-3 p-md-4 bg-white border-login">
 
-                <form method="POST" action="/public/login.php">
+                <form method="POST">
                     <div class="form-group pb-1">
                         <label>読者ID</label>
                         <input type="text" name="id" class="form-control border-login" placeholder="yomi64"></input>
-                        <span class="text-danger"> <?php echo $message; ?> </span>
+                        <span class="text-danger"> <?php echo $errors['id']; ?> </span>
+                        <span class="text-danger"> <?php echo $invalidIdError; ?> </span>
                     </div>
-                    <div class="form-group pb-4">
+                    <div class="form-group pb-5">
                         <label>あいことば</label>
                         <input type="password" name="password" class="form-control border-login" placeholder="******"></input>
+                        <span class="text-danger"> <?php echo $errors['password']; ?> </span>
+                        <span class="text-danger"> <?php echo $invalidPasswordError; ?> </span>
                     </div>
-                    <button type="submit" class="btn btn-primary">送信</button>
+                    <button type="submit" name="submit" class="btn btn-primary">送信</button>
                 </form>
 
             </div>

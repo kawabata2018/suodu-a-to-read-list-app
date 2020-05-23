@@ -3,13 +3,14 @@
 $id = $password1 = $password2 = '';
 $errors = array('id'=>'', 'password1'=>'', 'password2'=>'');
 
+// get session values
 session_start();
-$existsUserError = $_SESSION['existsUserError'];
+$userExistsError = $_SESSION['userExistsError'];
 
 // unset session values
 unset($_SESSION['id']);
 unset($_SESSION['password']);
-unset($_SESSION['existsUserError']);
+unset($_SESSION['userExistsError']);
 
 if (isset($_POST['submit'])) {
     // check id
@@ -17,8 +18,8 @@ if (isset($_POST['submit'])) {
         $errors['id'] = 'IDを入力してね';
     } else {
         $id = htmlspecialchars($_POST['id']);
-        if (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $id)) {
-            $errors['id'] = '英数6-12文字で入力してね';
+        if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id)) {
+            $errors['id'] = '英数4-12文字で入力してね';
         }
     }
 
@@ -27,8 +28,8 @@ if (isset($_POST['submit'])) {
         $errors['password1'] = 'あいことばを入力してね';
     } else {
         $password1 = htmlspecialchars($_POST['password1']);
-        if (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $password1)) {
-            $errors['password1'] = '英数6-12文字で入力してね';
+        if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $password1)) {
+            $errors['password1'] = '英数4-12文字で入力してね';
         }
     }
 
@@ -41,7 +42,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['id'] = $id;
         $_SESSION['password'] = $password1;
         // echo 'REDIRECT';
-        header('Location: /controller/Login-controller.php');
+        header('Location: /controller/Signup-controller.php');
         exit;
     }
 }
@@ -61,17 +62,17 @@ if (isset($_POST['submit'])) {
 
             <form method="POST">
                 <div class="form-group pb-1">
-                    <label>読者ID（英数6-12文字）</label>
+                    <label>読者ID（英数4-12文字）<span class="text-small">*IDは変更できません</span> </label>
                     <input type="text" name="id" class="form-control border-login" placeholder="yomi64"></input>
                     <span class="text-danger"> <?php echo $errors['id']; ?> </span>
-                    <span class="text-danger"> <?php echo $existsUserError; ?> </span>
+                    <span class="text-danger"> <?php echo $userExistsError; ?> </span>
                 </div>
                 <div class="form-group pb-1">
-                    <label>あいことば（英数6-12文字）</label>
+                    <label>あいことば（英数4-12文字）</label>
                     <input type="password" name="password1" class="form-control border-login" placeholder="******"></input>
                     <span class="text-danger"> <?php echo $errors['password1']; ?> </span>
                 </div>
-                <div class="form-group pb-4">
+                <div class="form-group pb-5">
                     <label>あいことば（確認）</label>
                     <input type="password" name="password2" class="form-control border-login" placeholder="******"></input>
                     <span class="text-danger"> <?php echo $errors['password2']; ?> </span>

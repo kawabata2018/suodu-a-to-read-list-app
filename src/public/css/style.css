@@ -1,3 +1,18 @@
+.brand {
+    background: #7A4C43 !important;
+}
+
+.brand-text {
+    color: #7A4C43 !important;
+}
+
+.icon img {
+    width: 300px;
+    height: auto;
+    margin: 20px auto;
+    padding: 10px;
+}
+
 .bg-book {
     background: #F5F2ED;
 }
@@ -18,17 +33,6 @@
     border: 1px solid #7A4C43;
 }
 
-.brand {
-    background: #7A4C43 !important;
-}
-
-.brand-text {
-    color: #7A4C43 !important;
-}
-
-.icon img {
-    width: 300px;
-    height: auto;
-    margin: 20px auto;
-    padding: 10px;
+.text-small {
+    font-size: 0.8rem !important;
 }

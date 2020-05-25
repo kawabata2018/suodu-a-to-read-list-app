@@ -6,12 +6,12 @@ require_once '../dao/UserDAO.php';
 session_start();
 $name = $_SESSION['name'];
 $profile = $_SESSION['profile'];
-$publishOrNot = $_SESSION['publishOrNot'];
+$publishOrNot = $_SESSION['publish_or_not'];
 
 // unset session values
 unset($_SESSION['name']);
 unset($_SESSION['profile']);
-unset($_SESSION['publishOrNot']);
+unset($_SESSION['publish_or_not']);
 
 // get user id
 $id = $_GET['id'];
@@ -28,6 +28,7 @@ $dao->connect();
 $isProtected = ($publishOrNot == 'on')? false: true;
 $res = $dao->updateUserWelcome($id, $name, $profile, $isProtected);
 $dao->close();
+
 
 if ($res) {
     // echo '<br>アカウントが更新されました。';

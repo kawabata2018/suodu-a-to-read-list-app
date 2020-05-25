@@ -7,6 +7,10 @@ session_start();
 $id = $_SESSION['id'];
 $password = $_SESSION['password'];
 
+// unset session values
+unset($_SESSION['id']);
+unset($_SESSION['password']);
+
 // start login process
 $dao = new UserDAO();
 $dao->connect();
@@ -17,7 +21,7 @@ $dao->connect();
 $res = $dao->userExistsOrNot($id);
 
 if (! $res) {
-    $_SESSION['invalidIdError'] = 'その読者IDはまだ登録されてないよ';
+    $_SESSION['invalid_id_error'] = 'その読者IDはまだ登録されてないよ';
     header('Location: /public/login.php');
     exit;
 
@@ -25,12 +29,16 @@ if (! $res) {
     $hashedPassword = $dao->getPassword($id);
     $dao->close();
     if (password_verify($password, $hashedPassword)) {
-        // echo 'Signed in successfully!!';
+        /** 
+         * logged in sucessfully, store the user_id value
+         * into $_SESSION['user_id']
+         */
+        $_SESSION['user_id'] = $id;
         header('Location: /public/library.php?id='.$id);
         exit;
 
     } else {
-        $_SESSION['invalidPasswordError'] = 'あいことばが正しくないよ';
+        $_SESSION['invalid_password_error'] = 'あいことばが正しくないよ';
         header('Location: /public/login.php');
         exit;
     }

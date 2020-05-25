@@ -2,10 +2,14 @@
 
 require_once '../dao/UserDAO.php';
 
+// get session values
 session_start();
-
 $id = $_SESSION['id'];
 $password = $_SESSION['password'];
+
+// unset session values
+unset($_SESSION['id']);
+unset($_SESSION['password']);
 
 if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id) or !preg_match('/^[a-zA-Z0-9_]{4,12}$/', $password)) {
     header('Location: /404');
@@ -19,7 +23,7 @@ if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id) or !preg_match('/^[a-zA-Z0-9_]{4,
     $res1 = $dao->userExistsOrNot($id);
 
     if ($res1) {
-        $_SESSION['userExistsError'] = 'その読者IDはすでに存在するよ';
+        $_SESSION['user_exists_error'] = 'その読者IDはすでに存在するよ';
         $dao->close();
         header('Location: /public/signup.php');
         exit;
@@ -28,6 +32,11 @@ if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id) or !preg_match('/^[a-zA-Z0-9_]{4,
         $res2 = $dao->createUser($id, $password);
         $dao->close();
         if ($res2) {
+            /** 
+             * signed up sucessfully, store the user_id value
+             * into $_SESSION['user_id']
+             */
+            $_SESSION['user_id'] = $id;
             header('Location: /public/welcome.php?id=' . $id);
             exit;
         } else {

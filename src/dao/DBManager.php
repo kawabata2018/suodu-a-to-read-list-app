@@ -13,7 +13,7 @@ class DBManager {
             $dbh = new PDO($this->dsn, $this->user, $this->password);
         } catch (PDOException $e) {
             // echo '<br>DBに接続できません';
-            header('Location: /500dbconnection');
+            header('Location: /500#dbconnection');
             exit;
         }
         return $dbh;

@@ -33,7 +33,7 @@ class UserDAO {
 
         } catch (Exception $e) {
             // echo '<br>DB処理でエラーが発生しました';
-            header('Location: /500');
+            header('Location: /500#db');
             exit;
         }
     }
@@ -55,7 +55,7 @@ class UserDAO {
 
         } catch (Exception $e) {
             // echo '<br>DB処理でエラーが発生しました';
-            header('Location: /500');
+            header('Location: /500#db');
             exit;
         }
     }
@@ -81,7 +81,7 @@ class UserDAO {
             $user->setDeleteFlag($deleteFlag);
         } catch (Exception $e) {
             // echo '<br>DB処理でエラーが発生しました';
-            header('Location: /500');
+            header('Location: /500#db');
             exit;
         }
         return $user;
@@ -106,7 +106,7 @@ class UserDAO {
 
         } catch (Exception $e) {
             // echo '<br>DB処理でエラーが発生しました';
-            header('Location: /500');
+            header('Location: /500#db');
             exit;
         }
         return $res;
@@ -115,9 +115,13 @@ class UserDAO {
     public function updateUserWelcome($userId, $userName, $profile, $isProtected) {
         $res = false;
         try {
-            $sql = 'UPDATE user SET user_name=?, profile=?, is_protected=? WHERE user_id=?';
+            $sql = 'UPDATE user SET user_name=?, profile=?, `is_protected`=? WHERE user_id=?';
             $stmt = $this->dbh->prepare($sql);
-            $flag = $stmt->execute(array($userName, $profile, $isProtected, $userId));
+            $stmt->bindParam(1, $userName);
+            $stmt->bindParam(2, $profile);
+            $stmt->bindParam(3, $isProtected, PDO::PARAM_BOOL);
+            $stmt->bindParam(4, $userId);
+            $flag = $stmt->execute();
 
             if ($flag) {
                 // echo '<br>データが更新されました';
@@ -129,7 +133,7 @@ class UserDAO {
 
         } catch (Exception $e) {
             // echo '<br>DB処理でエラーが発生しました';
-            header('Location: /500');
+            header('Location: /500#db');
             exit;
         }
         return $res;

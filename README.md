@@ -26,4 +26,8 @@ make init
 ### 備忘錄
 - 關於int(M)的問題
 > M表示最大顯示寬度。顯示寬度與所佔多少存儲空間無任何關係  
-> int(3), int(4), int(8)在磁盤上都是佔用4bytes的存儲空間  
+> int(3), int(4), int(8)在磁盤上都是佔用4bytes的存儲空間 
+
+- 關於stmt->execute(array)與boolean型的問題
+> https://www.php.net/manual/en/pdostatement.execute.php  
+> All values are treated as PDO::PARAM_STR.  

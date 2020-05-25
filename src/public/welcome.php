@@ -4,15 +4,15 @@ $errors = array('name'=>'', 'profile'=>'');
 
 // get session values
 session_start();
-$id = $_SESSION['id'];
+$userId = $_SESSION['user_id'];
 
 // unset session values
 unset($_SESSION['name']);
 unset($_SESSION['profile']);
-unset($_SESSION['publishOrNot']);
+unset($_SESSION['publish_or_not']);
 
 // confirm whether or not signed in
-if ($_GET['id'] == '' or $id != $_GET['id']) {
+if ($_GET['id'] == '' or $userId != $_GET['id']) {
     header('Location: /index.php');
 }
 
@@ -32,28 +32,32 @@ if (isset($_POST['submit'])) {
         $errors['profile'] = '100字以内で入力してね';
     }
 
-    // 'on' or ''
-    $publishOrNot = $_POST['publishOrNot'];
-    if (! array_filter($errors)) {
+    // 'on' or 'off'
+    $publishOrNot = 'off'; // default
+    $publishOrNot = $_POST['publishOrNot']; // 'on' when checked
+    if (!array_filter($errors)) {
         $_SESSION['name'] = $name;
         $_SESSION['profile'] = $profile;
-        $_SESSION['publishOrNot'] = $publishOrNot;
+        $_SESSION['publish_or_not'] = $publishOrNot;
         // echo 'REDIRECT';
-        header('Location: /controller/Welcome-controller.php?id='.$id);
+        header('Location: /controller/Welcome-controller.php?id='.$userId);
         exit;
     }
 }
 
 ?>
 
-<?php include('templates/header.php'); ?>
+<?php include('templates/header-nobtn.php'); ?>
 
 <div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
     <div class="mx-auto col-10 col-sm-6 col-lg-4 hide-sm">
+        <div class="text-center">
+            <p class="h4 font-weight-bolder">登録完了！</p>
+            <p>あなただけの書庫ができあがりました</p>
+        </div>
         <div class="rounded-1 bg-white border-login">
             <div class="container p-3 p-md-4 bg-red-login border-login">
-                <span class="h5 font-weight-bolder">登録完了！</span> <br>
-                <span>あなただけの書庫ができあがりました</span>
+                <span class="h5 font-weight-bolder">プロフィール登録</span> <br>
                 <!-- <span>Sign up</span> -->
             </div>
             <div class="container p-3 p-md-4 bg-white border-login">
@@ -82,10 +86,13 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container p-3 p-md-4 bg-beige-login border-login">
                 <span class="d-inline-block">プロフィール登録はスキップできます</span>
-                <span class="d-inline-block"><a <?php echo 'href="/public/library.php?id='.$id.'"'; ?> >あとで</a></span>
+                <span class="d-inline-block"><a <?php echo 'href="/public/library.php?id='.$userId.'"'; ?> >あとで</a></span>
             </div>
         </div>
     </div>
 </div>
 
+<footer class="section mt-2">
+    <div class="text-center text-muted">&copy; Copyright 2020 Kawabata</div>
+</footer>
 <?php include('templates/footer.php'); ?>

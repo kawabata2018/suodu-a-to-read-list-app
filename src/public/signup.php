@@ -5,12 +5,12 @@ $errors = array('id'=>'', 'password1'=>'', 'password2'=>'');
 
 // get session values
 session_start();
-$userExistsError = $_SESSION['userExistsError'];
+$userExistsError = $_SESSION['user_exists_error'];
 
 // unset session values
 unset($_SESSION['id']);
 unset($_SESSION['password']);
-unset($_SESSION['userExistsError']);
+unset($_SESSION['user_exists_error']);
 
 if (isset($_POST['submit'])) {
     // check id
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<?php include('templates/header.php'); ?>
+<?php include('templates/header-nobtn.php'); ?>
 
 <div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
     <div class="mx-auto col-10 col-sm-6 col-lg-4 hide-sm">
@@ -89,4 +89,7 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 
+<footer class="section mt-2">
+    <div class="text-center text-muted">&copy; Copyright 2020 Kawabata</div>
+</footer>
 <?php include('templates/footer.php'); ?>

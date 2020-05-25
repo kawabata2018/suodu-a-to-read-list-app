@@ -5,16 +5,22 @@ $errors = array('id'=>'', 'password'=>'');
 
 // get session values
 session_start();
-$invalidIdError = $_SESSION['invalidIdError'];
-$invalidPasswordError = $_SESSION['invalidPasswordError'];
+$invalidIdError = $_SESSION['invalid_id_error'];
+$invalidPasswordError = $_SESSION['invalid_password_error'];
 
 // unset session values
 unset($_SESSION['id']);
 unset($_SESSION['password']);
-unset($_SESSION['invalidIdError']);
-unset($_SESSION['invalidPasswordError']);
+unset($_SESSION['invalid_id_error']);
+unset($_SESSION['invalid_password_error']);
 
-if (isset($_POST['submit'])) {
+// if already logged in, move to library page
+if (isset($_SESSION['user_id'])) {
+    header('Location: /public/library.php?id='.$_SESSION['user_id']);
+    exit;
+}
+
+if (isset($_POST['submit'])) { 
     // check id
     if (empty($_POST['id'])) {
         $errors['id'] = 'IDを入力してね';
@@ -40,7 +46,7 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<?php include('templates/header.php'); ?>
+<?php include('templates/header-nobtn.php'); ?>
 
 <div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
     <div class="mx-auto col-10 col-sm-6 col-lg-4 hide-sm">
@@ -64,7 +70,7 @@ if (isset($_POST['submit'])) {
                         <span class="text-danger"> <?php echo $errors['password']; ?> </span>
                         <span class="text-danger"> <?php echo $invalidPasswordError; ?> </span>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary">送信</button>
+                    <button type="submit" name="submit" class="btn btn-primary">入庫</button>
                 </form>
 
             </div>
@@ -75,4 +81,7 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 
+<footer class="section mt-2">
+    <div class="text-center text-muted">&copy; Copyright 2020 Kawabata</div>
+</footer>
 <?php include('templates/footer.php'); ?>

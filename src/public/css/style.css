@@ -2,7 +2,7 @@
     background: #7A4C43 !important;
 }
 
-.brand-text {
+.text-brand {
     color: #7A4C43 !important;
 }
 
@@ -19,6 +19,10 @@
 
 .bg-green-login {
     background: #86C215;
+}
+
+.bg-green-navbar {
+    background: #A8E437;
 }
 
 .bg-red-login {

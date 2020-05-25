@@ -18,5 +18,5 @@
                 <span class="align-middle text-muted h5">君之所読者何書也？</span>
             </li> -->
         </ul>
-        <button onclick="location.href='/public/login.php'" class="btn btn-sm btn-outline-dark navbar-btn navbar-right align-middle">ログイン</button>
+        <!-- <button onclick="location.href='/public/login.php'" class="btn btn-sm btn-outline-dark navbar-btn navbar-right align-middle">ログイン</button> -->
     </nav>

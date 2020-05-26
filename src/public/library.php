@@ -40,31 +40,47 @@ $dao->close();
     </div>
 </nav> -->
 
-<nav class="navbar p-0 navbar-light bg-white">
-    <div class="container">
-            <ul class="nav nav-tabs">
-                <li class="nav-item rounded-top ">
-                    <a class="nav-link " >未読</a>
-                </li>
-                <li class="nav-item rounded-top ">
-                    <a class="nav-link " >已読</a>
-                </li>
-                <li class="nav-item rounded-top bg-book">
-                    <a class="nav-link " >我</a>
-                </li>
-            </ul>
+<nav class="navbar navbar-fixed-top navbar-expand-md navbar-light flex-md-row bg-white border-navbar z-depth-0">
+
+    <a class="navbar-brand" href="/">
+        <img src="/public/img/yomimushi.png" width="50" hspace="10" class="d-inline-block active" alt="よみむし"/>
+        <span class="align-middle text-brand h3" >所読</span>
+    </a>
+    <button type="button" class="navbar-toggler navbar-right" data-toggle="collapse" data-target="#Mydropdown" aria-controls="Mydropdown" aria-expanded="false" >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="Mydropdown">
+        <ul class="nav navbar-nav flex-row-md ml-auto">
+            <li class="nav-item px-md-2 cursor-pointer ">
+                <a class="nav-link" >読みたい</a>
+            </li>
+            <li class="nav-item px-md-2 cursor-pointer ">
+                <a class="nav-link" >読んだ</a>
+            </li>
+            <li class="nav-item px-md-2 cursor-pointer ">
+                <a class="nav-link" >じぶん</a>
+            </li>
+            <li onClick="signOut()" class="nav-item pl-md-5 pr-md-2 cursor-pointer ">
+                <a class="nav-link" >ログアウト</a>
+            </li>
+        </ul>
     </div>
+
 </nav>
 
 <p class="text-center h4 mt-3"> <?php echo $user->getUserName(); ?>さんの書庫 </p>
-<p class="text-center">created at <?php echo $user->getCreatedAt(); ?> </p>
+<p class="text-center mt-2"> <?php echo $user->getProfile(); ?> </p>
 
 <div class="icon text-center">
-    <img src="/public/img/yomimushi.png" alt="よみむし" />
+    <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
 </div>
-<div class="container text-right">
+
+<p class="text-center mt-0">created at <?php echo $user->getCreatedAt(); ?> </p>
+
+<!-- <div class="container text-right">
     <button onClick="signOut()" class="btn btn-sm btn-secondary">Sign out</button>
-</div>
+</div> -->
 
 <footer class="section mt-2">
     <div class="text-center text-muted">&copy; Copyright 2020 Kawabata</div>

@@ -6,11 +6,19 @@
     color: #7A4C43 !important;
 }
 
+.text-small {
+    font-size: 0.8rem !important;
+}
+
 .icon img {
     width: 300px;
     height: auto;
     margin: 20px auto;
     padding: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .bg-book {
@@ -37,6 +45,6 @@
     border: 1px solid #7A4C43;
 }
 
-.text-small {
-    font-size: 0.8rem !important;
+.border-navbar {
+    border-bottom: 0.1rem solid #7A4C43;
 }

@@ -13,7 +13,7 @@ $userId = $_SESSION['user_id'];
 
 // confirm whether or not signed in
 if ($_GET['id'] == '' or $userId != $_GET['id']) {
-    header('Location: /index.php');
+    header('Location: /');
     exit;
 }
 

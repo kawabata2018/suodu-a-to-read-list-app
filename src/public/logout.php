@@ -7,7 +7,7 @@ session_start();
 unset($_SESSION['user_id']);
 
 // go back to index.php
-header('Location: /index.php');
+header('Location: /');
 exit;
 
 ?>

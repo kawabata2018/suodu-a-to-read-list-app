@@ -13,7 +13,7 @@ unset($_SESSION['publish_or_not']);
 
 // confirm whether or not signed in
 if ($_GET['id'] == '' or $userId != $_GET['id']) {
-    header('Location: /index.php');
+    header('Location: /');
 }
 
 // enable utf-8

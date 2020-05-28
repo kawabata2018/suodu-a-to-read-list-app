@@ -32,7 +32,7 @@ $dao->close();
 
 if ($res) {
     // echo '<br>アカウントが更新されました。';
-    header('Location: /public/library.php?id='.$id);
+    header('Location: /public/library?id='.$id);
     exit;
 
 } else {

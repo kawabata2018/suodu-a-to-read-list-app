@@ -7,4 +7,7 @@ ENV TZ=UTC \
   MYSQL_PASSWORD=secret
 
 COPY ./my.cnf /etc/my.cnf
+RUN mkdir /var/log/mysql
+RUN chown mysql:mysql /var/log/mysql
+
 

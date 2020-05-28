@@ -2,6 +2,7 @@ version: "3.7"
 
 volumes:
   db-store:
+  db-log-store:
 
 services:
   app:
@@ -20,7 +21,7 @@ services:
     build: ./docker/mysql
     volumes:
       - db-store:/var/lib/mysql
-      - ./docker/logs:/var/log/mysql
+      - db-log-store:/var/log/mysql
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306

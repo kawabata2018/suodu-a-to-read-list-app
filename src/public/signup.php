@@ -1,5 +1,8 @@
 <?php
 
+// import class
+require_once 'templates/escape-func.php';
+
 $id = $password1 = $password2 = '';
 $errors = array('id'=>'', 'password1'=>'', 'password2'=>'');
 
@@ -17,7 +20,7 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['id'])) {
         $errors['id'] = 'IDを入力してね';
     } else {
-        $id = htmlspecialchars($_POST['id']);
+        $id = $_POST['id'];
         if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id)) {
             $errors['id'] = '英数4-12文字で入力してね';
         }
@@ -27,7 +30,7 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['password1'])) {
         $errors['password1'] = 'あいことばを入力してね';
     } else {
-        $password1 = htmlspecialchars($_POST['password1']);
+        $password1 = $_POST['password1'];
         if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $password1)) {
             $errors['password1'] = '英数4-12文字で入力してね';
         }
@@ -39,8 +42,8 @@ if (isset($_POST['submit'])) {
     }
 
     if (! array_filter($errors)) {
-        $_SESSION['id'] = $id;
-        $_SESSION['password'] = $password1;
+        $_SESSION['id'] = hescape($id);
+        $_SESSION['password'] = hescape($password1);
         // echo 'REDIRECT';
         header('Location: /controller/Signup-controller.php');
         exit;
@@ -83,7 +86,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container p-3 p-md-4 bg-beige-login border-login">
                 <span class="d-inline-block">Already signed up?</span>
-                <span class="d-inline-block"><a href="/public/login.php">Login here</a> instead.</span>
+                <span class="d-inline-block"><a href="/public/login">Login here</a> instead.</span>
             </div>
         </div>
     </div>

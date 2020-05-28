@@ -1,6 +1,7 @@
 <?php
 
 // import class
+require_once 'templates/escape-func.php';
 require_once '../dao/UserDAO.php';
 require_once '../entity/User.php';
 
@@ -28,7 +29,6 @@ $user = $dao->getUser($userId);
 $dao->close();
 
 ?>
-
 
 <?php include('templates/header-lib.php'); ?>
 
@@ -90,7 +90,7 @@ $dao->close();
 function signOut() {
     var res = confirm('ログアウトしますか？');
     if (res) {
-        location.replace('logout.php');
+        location.replace('/controller/Logout-controller.php');
     }
 }
 </script>

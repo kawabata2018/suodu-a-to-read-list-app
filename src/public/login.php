@@ -1,5 +1,8 @@
 <?php
 
+// import class
+require_once 'templates/escape-func.php';
+
 $id = $password = '';
 $errors = array('id'=>'', 'password'=>'');
 
@@ -16,7 +19,7 @@ unset($_SESSION['invalid_password_error']);
 
 // if already logged in, move to library page
 if (isset($_SESSION['user_id'])) {
-    header('Location: /public/library.php?id='.$_SESSION['user_id']);
+    header('Location: /public/library?id='.$_SESSION['user_id']);
     exit;
 }
 
@@ -36,8 +39,8 @@ if (isset($_POST['submit'])) {
     }
 
     if (! array_filter($errors)) {
-        $_SESSION['id'] = $id;
-        $_SESSION['password'] = $password;
+        $_SESSION['id'] = hescape($id);
+        $_SESSION['password'] = hescape($password);
         // echo 'REDIRECT';
         header('Location: /controller/Login-controller.php');
         exit;
@@ -75,7 +78,7 @@ if (isset($_POST['submit'])) {
 
             </div>
             <div class="container p-3 p-md-4 bg-beige-login border-login">
-                <span class="d-inline-block">書庫がまだない方は<a href="/public/signup.php">こちら</a></span><span class="d-inline-block">（新規登録）</span>
+                <span class="d-inline-block">書庫がまだない方は<a href="/public/signup">こちら</a></span><span class="d-inline-block">（新規登録）</span>
             </div>
         </div>
     </div>

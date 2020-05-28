@@ -22,7 +22,7 @@ $res = $dao->userExistsOrNot($id);
 
 if (! $res) {
     $_SESSION['invalid_id_error'] = 'その読者IDはまだ登録されてないよ';
-    header('Location: /public/login.php');
+    header('Location: /public/login');
     exit;
 
 } else {
@@ -34,12 +34,12 @@ if (! $res) {
          * into $_SESSION['user_id']
          */
         $_SESSION['user_id'] = $id;
-        header('Location: /public/library.php?id='.$id);
+        header('Location: /public/library?id='.$id);
         exit;
 
     } else {
         $_SESSION['invalid_password_error'] = 'あいことばが正しくないよ';
-        header('Location: /public/login.php');
+        header('Location: /public/login');
         exit;
     }
 

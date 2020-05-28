@@ -25,7 +25,7 @@ if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id) or !preg_match('/^[a-zA-Z0-9_]{4,
     if ($res1) {
         $_SESSION['user_exists_error'] = 'その読者IDはすでに存在するよ';
         $dao->close();
-        header('Location: /public/signup.php');
+        header('Location: /public/signup');
         exit;
 
     } else {
@@ -37,7 +37,7 @@ if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id) or !preg_match('/^[a-zA-Z0-9_]{4,
              * into $_SESSION['user_id']
              */
             $_SESSION['user_id'] = $id;
-            header('Location: /public/welcome.php?id=' . $id);
+            header('Location: /public/welcome?id=' . $id);
             exit;
         } else {
             // echo '<br>アカウント作成に失敗しました。';

@@ -1,5 +1,8 @@
 <?php
 
+// import class
+require_once 'templates/escape-func.php';
+
 $errors = array('name'=>'', 'profile'=>'');
 
 // get session values
@@ -22,13 +25,13 @@ mb_regex_encoding("UTF-8");
 if (isset($_POST['submit'])) {
     // check name
     $name = $_POST['name'];
-    if (!preg_match('/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r].{0,20}$/u', $name)) {
+    if (!preg_match('/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\r\n].{0,20}$/u', $name)) {
         $errors['name'] = '20字以内で入力してね';
     }
 
     // check profile
     $profile = $_POST['profile'];
-    if (!preg_match('/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r].{0,100}$/u', $profile)) {
+    if (!preg_match('/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\r\n].{0,100}$/u', $profile)) {
         $errors['profile'] = '100字以内で入力してね';
     }
 
@@ -36,9 +39,9 @@ if (isset($_POST['submit'])) {
     $publishOrNot = 'off'; // default
     $publishOrNot = $_POST['publishOrNot']; // 'on' when checked
     if (!array_filter($errors)) {
-        $_SESSION['name'] = $name;
-        $_SESSION['profile'] = $profile;
-        $_SESSION['publish_or_not'] = $publishOrNot;
+        $_SESSION['name'] = hescape($name);
+        $_SESSION['profile'] = hescape($profile);
+        $_SESSION['publish_or_not'] = hescape($publishOrNot);
         // echo 'REDIRECT';
         header('Location: /controller/Welcome-controller.php?id='.$userId);
         exit;
@@ -86,7 +89,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container p-3 p-md-4 bg-beige-login border-login">
                 <span class="d-inline-block">プロフィール登録はスキップできます</span>
-                <span class="d-inline-block"><a <?php echo 'href="/public/library.php?id='.$userId.'"'; ?> >あとで</a></span>
+                <span class="d-inline-block"><a <?php echo 'href="/public/library?id='.$userId.'"'; ?> >あとで</a></span>
             </div>
         </div>
     </div>

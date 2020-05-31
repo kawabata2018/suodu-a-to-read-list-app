@@ -38,13 +38,13 @@ $dao->close();
             <button onClick="signOut()" class="btn btn-sm btn-outline-dark navbar-btn navbar-right lign-middle">Sign out</button>
         </ul>
     </div>
-</nav> -->
+</nav> --> 
 
 <nav class="navbar navbar-fixed-top navbar-expand-md navbar-light flex-md-row bg-white border-navbar z-depth-0">
 
     <a class="navbar-brand" href="/">
         <img src="/public/img/yomimushi.png" width="50" hspace="10" class="d-inline-block active" alt="よみむし"/>
-        <span class="align-middle text-brand h3" >所読</span>
+        <span class="align-middle text-brand font-yumin h3" >所読</span>
     </a>
     <button type="button" class="navbar-toggler navbar-right" data-toggle="collapse" data-target="#Mydropdown" aria-controls="Mydropdown" aria-expanded="false" >
         <span class="navbar-toggler-icon"></span>
@@ -53,30 +53,35 @@ $dao->close();
     <div class="collapse navbar-collapse" id="Mydropdown">
         <ul class="nav navbar-nav flex-row-md ml-auto">
             <li class="nav-item px-md-2 cursor-pointer ">
-                <a class="nav-link" >読みたい</a>
+                <a href="#reading" class="nav-link" data-toggle="tab" aria-controls="reading">読みたい</a>
             </li>
             <li class="nav-item px-md-2 cursor-pointer ">
-                <a class="nav-link" >読んだ</a>
+                <a href="#read" class="nav-link" data-toggle="tab" aria-controls="read">読んだ</a>
             </li>
             <li class="nav-item px-md-2 cursor-pointer ">
-                <a class="nav-link" >じぶん</a>
+                <a href="#aboutme" class="nav-link active" data-toggle="tab" aria-controls="aboutme">じぶん</a>
             </li>
             <li onClick="signOut()" class="nav-item pl-md-5 pr-md-2 cursor-pointer ">
                 <a class="nav-link" >ログアウト</a>
             </li>
         </ul>
     </div>
-
 </nav>
 
-<p class="text-center h4 mt-3"> <?php echo $user->getUserName(); ?>さんの書庫 </p>
-<p class="text-center mt-2"> <?php echo $user->getProfile(); ?> </p>
+<div class="tab-content">
+    <div id="reading" class="tab-pane fade">
+        <?php include('components/reading.php'); ?>
+    </div>
 
-<div class="icon text-center">
-    <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
+    <div id="read" class="tab-pane fade">
+        <?php include('components/read.php'); ?>
+    </div>
+
+    <div id="aboutme" class="tab-pane fade show active">
+        <?php include('components/aboutme.php'); ?>
+    </div>
 </div>
 
-<p class="text-center mt-0">created at <?php echo $user->getCreatedAt(); ?> </p>
 
 <!-- <div class="container text-right">
     <button onClick="signOut()" class="btn btn-sm btn-secondary">Sign out</button>
@@ -90,7 +95,7 @@ $dao->close();
 function signOut() {
     var res = confirm('ログアウトしますか？');
     if (res) {
-        location.replace('/controller/Logout-controller.php');
+        location.replace('/controller/Logout-controller');
     }
 }
 </script>

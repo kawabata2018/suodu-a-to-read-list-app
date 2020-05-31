@@ -6,6 +6,10 @@
     color: #7A4C43 !important;
 }
 
+.font-yumin {
+    font-family: "游明朝", "Yu Mincho", "YuMincho", serif !important;
+}
+
 .text-small {
     font-size: 0.8rem !important;
 }

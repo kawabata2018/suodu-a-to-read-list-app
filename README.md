@@ -21,7 +21,7 @@ make init
 - 已登錄時使用 `$_SESSION['user_id']`
 
 ### 數據庫設計
-![ER図](draft/ERDiagram.png)
+![ER図](draft/ERDiagram_ver2.png)
 
 ### 備忘錄
 - 關於 `int(M)` 的問題

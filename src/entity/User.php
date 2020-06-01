@@ -13,10 +13,6 @@ class User {
     // constructor
     public function __construct(){
     }
-    public function __constructIP($userId, $password){
-        $this->userId = $userId;
-        $this->password = $password;
-    }
 
     // setters
     public function setUserId($userId){

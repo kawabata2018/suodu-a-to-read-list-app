@@ -52,3 +52,8 @@
 .border-navbar {
     border-bottom: 0.1rem solid #7A4C43;
 }
+
+.btn-round-2 {
+    width: 2rem;
+    height: 2rem;
+}

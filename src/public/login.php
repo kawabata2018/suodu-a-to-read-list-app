@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['id'] = hescape($id);
         $_SESSION['password'] = hescape($password);
         // echo 'REDIRECT';
-        header('Location: /controller/Login-controller.php');
+        header('Location: /controller/Login-controller');
         exit;
     }
 }

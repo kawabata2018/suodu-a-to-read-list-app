@@ -17,6 +17,7 @@ unset($_SESSION['publish_or_not']);
 // confirm whether or not signed in
 if ($_GET['id'] == '' or $userId != $_GET['id']) {
     header('Location: /');
+    exit;
 }
 
 // enable utf-8
@@ -25,7 +26,7 @@ mb_regex_encoding("UTF-8");
 if (isset($_POST['submit'])) {
     // check name
     $name = $_POST['name'];
-    if (!preg_match('/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\r\n].{0,20}$/u', $name)) {
+    if (!preg_match('/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。].{0,20}$/u', $name)) {
         $errors['name'] = '20字以内で入力してね';
     }
 
@@ -43,7 +44,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['profile'] = hescape($profile);
         $_SESSION['publish_or_not'] = hescape($publishOrNot);
         // echo 'REDIRECT';
-        header('Location: /controller/Welcome-controller.php?id='.$userId);
+        header('Location: /controller/Aboutme-controller?id='.$userId);
         exit;
     }
 }

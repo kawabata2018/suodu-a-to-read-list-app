@@ -11,7 +11,7 @@
 	<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light flex-md-row bg-white border-navbar z-depth-0">
         <a class="navbar-brand" href="/">
             <img src="/public/img/yomimushi.png" width="50" hspace="10" class="d-inline-block active" alt="よみむし"/>
-            <span class="align-middle text-brand h3" >所読</span>
+            <span class="align-middle text-brand font-yumin h3" >所読</span>
         </a>
         <ul class="collapse navbar-nav flex-row ml-auto d-md-flex">
             <!-- <li class="nav-item">

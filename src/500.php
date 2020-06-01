@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>500</title>
+    <title>500 Error</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/public/css/style.css">
@@ -8,7 +8,8 @@
 <body>
 
 <center class="icon">
-    <h2>500 INTERNAL SERVER ERROR</h2>
+    <h1 style="color: tomato">500</h1>
+    <h3>Internal Server Error</h3>
     <img src="/public/img/500.jpg">
     <div>
         <a href="/">トップページへ</a>

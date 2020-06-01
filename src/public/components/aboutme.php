@@ -8,10 +8,7 @@
 
     <p class="text-center mt-0">created at <?php echo $user->getCreatedAt(); ?> </p>
 
-    <form method="GET" action="/public/edit-aboutme">
-        <div class="text-right">
-            <button type="submit" class="btn btn-info" >編集</button>
-            <input type="hidden" name="id" <?php echo 'value="'.$userId.'"' ?> >
-        </div>
-    </form>
+    <div class="text-right">
+        <button type="submit" class="btn btn-info" onClick="location.href=' <?php echo '/public/edit-aboutme?id='.$userId; ?> '">編集</button>
+    </div>
 </div>

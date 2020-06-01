@@ -90,7 +90,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container p-3 p-md-4 bg-beige-login border-login">
                 <span class="d-inline-block">プロフィール登録はスキップできます</span>
-                <span class="d-inline-block"><a <?php echo 'href="/public/library?id='.$userId.'"'; ?> >あとで</a></span>
+                <span class="d-inline-block"><a href="<?php echo '/public/library?id='.$userId; ?> ">あとで</a></span>
             </div>
         </div>
     </div>

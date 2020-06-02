@@ -86,13 +86,10 @@ if (isset($_POST['submit'])) {
         <button type="submit" name="submit" class="btn btn-primary m-2">更新</button>
     </form>
     <div class="text-right">
-        <a class="text-info text-small" <?php echo 'href="/public/library?id='.$userId.'"'; ?> >更新せずに戻る</a>
+        <a class="text-info text-small" <?php echo 'href="/public/aboutme?id='.$userId.'"'; ?> >更新せずに戻る</a>
     </div>
 
     </div>
 </div>
 
-<footer class="section mt-2">
-    <div class="text-center text-muted">&copy; Copyright 2020 Kawabata</div>
-</footer>
 <?php include('templates/footer.php'); ?>

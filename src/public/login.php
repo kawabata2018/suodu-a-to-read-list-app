@@ -17,9 +17,9 @@ unset($_SESSION['password']);
 unset($_SESSION['invalid_id_error']);
 unset($_SESSION['invalid_password_error']);
 
-// if already logged in, move to library page
+// if already logged in, move to reading page
 if (isset($_SESSION['user_id'])) {
-    header('Location: /public/library?id='.$_SESSION['user_id']);
+    header('Location: /public/reading?id='.$_SESSION['user_id']);
     exit;
 }
 
@@ -84,7 +84,4 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 
-<footer class="section mt-2">
-    <div class="text-center text-muted">&copy; Copyright 2020 Kawabata</div>
-</footer>
 <?php include('templates/footer.php'); ?>

@@ -1,3 +1,17 @@
+<?php
+
+// get session values
+session_start();
+$userId = $_SESSION['user_id'];
+
+// confirm whether or not signed in
+if ($_GET['id'] == '' or $userId != $_GET['id']) {
+    header('Location: /public/login');
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 
 <head>
@@ -8,3 +22,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body class="bg-book">
+    <nav class="navbar navbar-fixed-top navbar-expand-md navbar-light flex-md-row bg-white border-navbar z-depth-0">
+
+        <a class="navbar-brand" href="/">
+            <img src="/public/img/yomimushi.png" width="50" hspace="10" class="d-inline-block active" alt="よみむし"/>
+            <span class="align-middle text-brand font-yumin h3" >所読</span>
+        </a>
+        <button type="button" class="navbar-toggler navbar-right" data-toggle="collapse" data-target="#Mydropdown" aria-controls="Mydropdown" aria-expanded="false" >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="Mydropdown">
+            <ul class="nav navbar-nav flex-row-md ml-auto">
+                <li class="nav-item px-md-2 cursor-pointer ">
+                    <a href=" <?php echo '/public/reading?id='.$userId ?> " class="nav-link">読みたい</a>
+                </li>
+                <li class="nav-item px-md-2 cursor-pointer ">
+                    <a href=" <?php echo '/public/library?id='.$userId ?> " class="nav-link">読んだ</a>
+                </li>
+                <li class="nav-item px-md-2 cursor-pointer ">
+                    <a href=" <?php echo '/public/aboutme?id='.$userId ?> " class="nav-link">じぶん</a>
+                </li>
+                <li onClick="signOut()" class="nav-item pl-md-5 pr-md-2 cursor-pointer ">
+                    <a class="nav-link" >ログアウト</a>
+                </li>
+            </ul>
+        </div>
+    </nav>

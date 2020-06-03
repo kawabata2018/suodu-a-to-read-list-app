@@ -34,7 +34,7 @@ if (! $res) {
          * into $_SESSION['user_id']
          */
         $_SESSION['user_id'] = $id;
-        header('Location: /public/library?id='.$id);
+        header('Location: /public/reading?id='.$id);
         exit;
 
     } else {

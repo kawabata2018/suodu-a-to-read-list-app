@@ -92,7 +92,4 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 
-<footer class="section mt-2">
-    <div class="text-center text-muted">&copy; Copyright 2020 Kawabata</div>
-</footer>
 <?php include('templates/footer.php'); ?>

@@ -31,7 +31,7 @@ $dao->close();
             <div class="container p-2 p-md-3">
                 <div class="row">
                     <div class="col-3 col-sm-2 col-md-1 d-flex align-items-center pr-0">
-                        <img src="/public/img/book_00.png" style="width:100%; ">
+                        <img src="/public/img/book_10.png" style="width:100%; ">
                     </div>
                     <div class="col-9 col-sm-10 col-md-9 col-lg-10">
                         <div class="m-2">

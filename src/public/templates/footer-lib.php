@@ -19,7 +19,8 @@
 		$(function(){
 			$('#date_sample').datepicker({
 				autoclose: true,
-				format: 'yyyy-mm-dd'
+				format: 'yyyy-mm-dd',
+				disableTouchKeyboard: true
 			});
 		});
 		

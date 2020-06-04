@@ -13,7 +13,6 @@ unset($_SESSION['password']);
 
 // start login process
 $dao = new UserDAO();
-$dao->connect();
 /**
  * if the entered id does not match any users,
  * alert that the user does not exist in the db.
@@ -27,7 +26,6 @@ if (! $res) {
 
 } else {
     $hashedPassword = $dao->getPassword($id);
-    $dao->close();
     if (password_verify($password, $hashedPassword)) {
         /** 
          * logged in sucessfully, store the user_id value

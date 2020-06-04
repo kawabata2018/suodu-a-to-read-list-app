@@ -18,7 +18,6 @@ $id = $_GET['id'];
 
 // update account information
 $dao = new UserDAO();
-$dao->connect();
 /**
  * try to update profile and is_protected
  * @isProtected:
@@ -27,7 +26,6 @@ $dao->connect();
  */
 $isProtected = ($publishOrNot == 'on')? false: true;
 $res = $dao->updateUserWelcome($id, $name, $profile, $isProtected);
-$dao->close();
 
 
 if ($res) {

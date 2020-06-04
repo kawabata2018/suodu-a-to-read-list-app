@@ -2,15 +2,15 @@
 
 class DBManager {
     // data source name
-    private $dsn = 'mysql:host=docker-mylamp_db_1;dbname=lamp_db;charset=utf8mb4';
+    const DSN = 'mysql:host=docker-mylamp_db_1;dbname=lamp_db;charset=utf8mb4';
     // user
-    private $user = 'phper';
+    const USER = 'phper';
     // password
-    private $password = 'secret';
+    const PASSWORD = 'secret';
 
-    public function getConnection(){
+    public static function getConnection(){
         try {
-            $dbh = new PDO($this->dsn, $this->user, $this->password);
+            $dbh = new PDO(self::DSN, self::USER, self::PASSWORD);
         } catch (PDOException $e) {
             // echo '<br>DBに接続できません';
             header('Location: /500#dbconnection');

@@ -49,11 +49,19 @@
     border: 1px solid #7A4C43;
 }
 
+.border-reading-line {
+    border-bottom: 0.5px solid #7A4C43;
+}
+
+.border-reading-frame {
+    border: 2px solid #7A4C43;
+}
+
 .border-navbar {
     border-bottom: 0.1rem solid #7A4C43;
 }
 
 .btn-round-2 {
-    width: 2rem;
-    height: 2rem;
+    width: 30px;
+    height: 30px;
 }

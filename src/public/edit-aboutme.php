@@ -18,7 +18,7 @@ unset($_SESSION['publish_or_not']);
 
 // confirm whether or not signed in
 if ($_GET['id'] == '' or $userId != $_GET['id']) {
-    header('Location: /');
+    header('Location: /public/login');
 }
 
 // enable utf-8
@@ -27,9 +27,7 @@ mb_regex_encoding("UTF-8");
 // get account information
 // @user: User object
 $dao = new UserDAO();
-$dao->connect();
 $user = $dao->getUser($userId);
-$dao->close();
 
 
 if (isset($_POST['submit'])) {
@@ -84,10 +82,11 @@ if (isset($_POST['submit'])) {
             <label class="custom-control-label" for="publishOrNot">自分の書庫を公開する</label>
         </div>
         <button type="submit" name="submit" class="btn btn-primary m-2">更新</button>
+        <button type="button" class="btn btn-secondary m-2" onClick="location.href=' <?php echo '/public/aboutme?id='.$userId; ?> '">戻る</button>
     </form>
-    <div class="text-right">
+    <!-- <div class="text-right">
         <a class="text-info text-small" <?php echo 'href="/public/aboutme?id='.$userId.'"'; ?> >更新せずに戻る</a>
-    </div>
+    </div> -->
 
     </div>
 </div>

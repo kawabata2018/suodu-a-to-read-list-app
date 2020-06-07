@@ -65,3 +65,14 @@
     width: 30px;
     height: 30px;
 }
+
+.custom-radio input[type="radio"] {
+    display: none !important;
+}
+.custom-radio label {
+    border: 0.2px #000 solid !important;
+}
+.custom-radio input[type="radio"]:not(:checked) + label {
+    background-color: #CCC !important;
+    color: #555 !important;
+}

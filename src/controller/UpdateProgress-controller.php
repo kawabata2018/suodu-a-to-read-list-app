@@ -6,6 +6,22 @@ require_once '../dao/ToReadDAO.php';
 session_start();
 $userId = $_SESSION['user_id'];
 
+// get user id
+$toreadId = $_GET['toreadId'];
+$newCurrentPage = $_GET['rangeValue'];
+
 $dao = new ToReadDAO();
+$res = $dao->updateProgress($toreadId, $newCurrentPage);
+
+if ($res) {
+    // echo '<br>アカウントが更新されました。';
+    header('Location: /controller/Reading-controller?sort=0&id='.$userId);
+    exit;
+
+} else {
+    // echo '<br>アカウント更新に失敗しました。';
+    header('Location: /500');
+    exit;
+}
 
 ?>

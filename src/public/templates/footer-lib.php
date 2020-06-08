@@ -45,15 +45,6 @@
 			});
 		})
 
-		// $(function(){
-		// 	// default
-		// 	$('#rangeValue').html($('#range').val());
-		// 	$('#range').on('input change', function() {
-		// 		// update
-		// 		$('#rangeValue').html($(this).val());
-		// 	});
-		// });
-
 		new Vue({
 			el: '#appAdd',
 			data() {

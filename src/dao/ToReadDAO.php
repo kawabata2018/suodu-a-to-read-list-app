@@ -100,6 +100,32 @@ class ToReadDAO {
         return $res;
     }
 
+    public function updateProgress($toreadId, $newCurrentPage) {
+        $res = false;
+        try {
+            $this->connect();
+            $sql = 'UPDATE toread SET current_page=? WHERE toread_id=?';
+            $stmt = $this->dbh->prepare($sql);
+            $flag = $stmt->execute(array($newCurrentPage, $toreadId));
+
+            if ($flag) {
+                // echo '<br>データが更新されました';
+                $res = true;
+            } else {
+                // echo '<br>データの更新に失敗しました';
+                $res = false;
+            }
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $res;
+    }
+
     // public function updateUserWelcome($userId, $userName, $profile, $isProtected) {
     //     $res = false;
     //     try {

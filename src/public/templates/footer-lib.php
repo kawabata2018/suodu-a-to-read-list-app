@@ -26,8 +26,36 @@
 			})
 		})
 
+		$('#progressModal').on('show.bs.modal', function (event) {
+			let button = $(event.relatedTarget);
+			let toreadid = parseInt(button.data('toreadid'));
+			let currentpage = parseInt(button.data('currentpage'));
+			let totalpage = parseInt(button.data('totalpage'));
+			let modal = $(this);
+			modal.find('#range').attr('value', currentpage);
+			modal.find('#range').attr('max', totalpage);
+			modal.find('#rangeMax').html("/ " + totalpage);
+			modal.find('#toreadId').val(toreadid);
+
+			// default
+			$('#rangeValue').html(currentpage);
+			$('#range').on('input change', function() {
+				// update
+				$('#rangeValue').html($(this).val());
+			});
+		})
+
+		// $(function(){
+		// 	// default
+		// 	$('#rangeValue').html($('#range').val());
+		// 	$('#range').on('input change', function() {
+		// 		// update
+		// 		$('#rangeValue').html($(this).val());
+		// 	});
+		// });
+
 		new Vue({
-			el: '#app-add',
+			el: '#appAdd',
 			data() {
 				return {
 					bookName: '',

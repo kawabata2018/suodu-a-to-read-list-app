@@ -38,32 +38,40 @@ class ToReadDAO {
     //     }
     // }
 
-    // public function getUser($userId) {
-    //     try {
-    //         $sql = 'SELECT * FROM user WHERE user_id = ?';
-    //         $stmt = $this->dbh->prepare($sql);
-    //         $stmt->execute(array($userId));
-    //         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function getAllReadingOrderByTargetDate($searchId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT toread_id, book_name, author_name, memo, color_tag, total_page, current_page, target_date FROM toread
+                    WHERE user_id = ? AND is_completed = false AND delete_flag = false
+                    ORDER BY target_date';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($searchId));
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    //         $user = new User();
-    //         $isProtected = ($result['is_protected'] == 0)? false: true;
-    //         $deleteFlag = ($result['delete_flag'] == 0)? false: true;
+            $toReadArray = array();
+            foreach ($result as $record) {
+                $toRead = new ToRead();
+                $toRead->setToreadId($record['toread_id']);
+                $toRead->setBookName($record['book_name']);
+                $toRead->setAuthorName($record['author_name']);
+                $toRead->setMemo($record['memo']);
+                $toRead->setColorTag($record['color_tag']);
+                $toRead->setTotalPage($record['total_page']);
+                $toRead->setCurrentPage($record['current_page']);
+                $toRead->setTargetDate($record['target_date']);
+                // add to toReadArray
+                $toReadArray[] = $toRead;
+            }
 
-    //         $user->setUserId($result['user_id']);
-    //         $user->setUserName($result['user_name']);
-    //         $user->setPassword($result['password']);
-    //         $user->setProfile($result['profile']);
-    //         $user->setIconPath($result['icon_path']);
-    //         $user->setCreatedAt($result['created_at']);
-    //         $user->setIsProtected($isProtected);
-    //         $user->setDeleteFlag($deleteFlag);
-    //     } catch (Exception $e) {
-    //         // echo '<br>DB処理でエラーが発生しました';
-    //         header('Location: /500#db');
-    //         exit;
-    //     }
-    //     return $user;
-    // }
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $toReadArray;
+    }
 
     public function createToRead($userId, $bookName, $colorTag, $totalPage, $targetDate) {
         $res = false;

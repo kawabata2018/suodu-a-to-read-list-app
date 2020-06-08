@@ -107,6 +107,18 @@ class ToRead {
     public function getDeleteFlag(){
         return $this->deleteFlag;
     }
+    public function getProgressPct() {
+        // return int (0-100)
+        return floor(100 * $this->currentPage / $this->totalPage);
+    }
+    public function getDaysToTargetDate() {
+        $today = date('Y-m-d');
+        $day1 = new DateTime($this->targetDate);
+        $day2 = new DateTime($today);
+        $diff = $day1->diff($day2);
+        // return int
+        return $diff->days;
+    }
 
 }
 

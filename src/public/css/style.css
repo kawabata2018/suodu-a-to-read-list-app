@@ -14,6 +14,12 @@
     font-size: 0.8rem !important;
 }
 
+@media (min-width: 768px) {
+.responsive-text {
+    font-size: 1.25rem;
+}
+}
+
 .icon img {
     width: 300px;
     height: auto;

@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="Mydropdown">
             <ul class="nav navbar-nav flex-row-md ml-auto">
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href=" <?php echo '/public/reading?id='.$_GET['id'] ?> " class="nav-link">読みたい</a>
+                    <a href=" <?php echo '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?> " class="nav-link">読みたい</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
                     <a href=" <?php echo '/public/library?id='.$_GET['id'] ?> " class="nav-link">読んだ</a>

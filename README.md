@@ -37,3 +37,6 @@ make init
 - 關於 `httpd.conf`
 > https://qiita.com/non0311/items/1114f080603d9007b1c4  
 > https://qiita.com/dokkoisho/items/03746e58d975bd7a35ec  
+
+### TODO
+- 進捗度バー入力値精査

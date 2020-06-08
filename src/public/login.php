@@ -19,7 +19,7 @@ unset($_SESSION['invalid_password_error']);
 
 // if already logged in, move to reading page
 if (isset($_SESSION['user_id'])) {
-    header('Location: /public/reading?id='.$_SESSION['user_id']);
+    header('Location: /controller/Reading-controller?sort=0&id='.$_SESSION['user_id']);
     exit;
 }
 

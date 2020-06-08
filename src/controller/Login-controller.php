@@ -32,7 +32,7 @@ if (! $res) {
          * into $_SESSION['user_id']
          */
         $_SESSION['user_id'] = $id;
-        header('Location: /public/reading?id='.$id);
+        header('Location: /controller/Reading-controller?sort=0&id='.$id);
         exit;
 
     } else {

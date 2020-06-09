@@ -73,14 +73,119 @@ class ToReadDAO {
         return $toReadArray;
     }
 
+    public function getAllReadingOrderByUpdatedAt($searchId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT toread_id, book_name, author_name, memo, color_tag, total_page, current_page, target_date FROM toread
+                    WHERE user_id = ? AND is_completed = false AND delete_flag = false
+                    ORDER BY updated_at DESC';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($searchId));
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $toReadArray = array();
+            foreach ($result as $record) {
+                $toRead = new ToRead();
+                $toRead->setToreadId($record['toread_id']);
+                $toRead->setBookName($record['book_name']);
+                $toRead->setAuthorName($record['author_name']);
+                $toRead->setMemo($record['memo']);
+                $toRead->setColorTag($record['color_tag']);
+                $toRead->setTotalPage($record['total_page']);
+                $toRead->setCurrentPage($record['current_page']);
+                $toRead->setTargetDate($record['target_date']);
+                // add to toReadArray
+                $toReadArray[] = $toRead;
+            }
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $toReadArray;
+    }
+
+    public function getAllReadingOrderByBookName($searchId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT toread_id, book_name, author_name, memo, color_tag, total_page, current_page, target_date FROM toread
+                    WHERE user_id = ? AND is_completed = false AND delete_flag = false
+                    ORDER BY book_name';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($searchId));
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $toReadArray = array();
+            foreach ($result as $record) {
+                $toRead = new ToRead();
+                $toRead->setToreadId($record['toread_id']);
+                $toRead->setBookName($record['book_name']);
+                $toRead->setAuthorName($record['author_name']);
+                $toRead->setMemo($record['memo']);
+                $toRead->setColorTag($record['color_tag']);
+                $toRead->setTotalPage($record['total_page']);
+                $toRead->setCurrentPage($record['current_page']);
+                $toRead->setTargetDate($record['target_date']);
+                // add to toReadArray
+                $toReadArray[] = $toRead;
+            }
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $toReadArray;
+    }
+
+    public function getAllReadingOrderByColorTag($searchId, $colorTag) {
+        try {
+            $this->connect();
+            $sql = 'SELECT toread_id, book_name, author_name, memo, color_tag, total_page, current_page, target_date FROM toread
+                    WHERE user_id = ? AND color_tag = ? AND is_completed = false AND delete_flag = false
+                    ORDER BY target_date';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($searchId, $colorTag));
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $toReadArray = array();
+            foreach ($result as $record) {
+                $toRead = new ToRead();
+                $toRead->setToreadId($record['toread_id']);
+                $toRead->setBookName($record['book_name']);
+                $toRead->setAuthorName($record['author_name']);
+                $toRead->setMemo($record['memo']);
+                $toRead->setColorTag($record['color_tag']);
+                $toRead->setTotalPage($record['total_page']);
+                $toRead->setCurrentPage($record['current_page']);
+                $toRead->setTargetDate($record['target_date']);
+                // add to toReadArray
+                $toReadArray[] = $toRead;
+            }
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $toReadArray;
+    }
+
     public function createToRead($userId, $bookName, $colorTag, $totalPage, $targetDate) {
         $res = false;
         try {
             $this->connect();
-            $sql = 'INSERT INTO toread(user_id, book_name, color_tag, total_page, target_date, created_at) VALUES(?,?,?,?,?,?)';
+            $sql = 'INSERT INTO toread(user_id, book_name, color_tag, total_page, target_date, created_at, updated_at) VALUES(?,?,?,?,?,?,?)';
             $stmt = $this->dbh->prepare($sql);
             $timestamp = date('Y-m-d H:i:s');
-            $flag = $stmt->execute(array($userId, $bookName, $colorTag, $totalPage, $targetDate, $timestamp));
+            $flag = $stmt->execute(array($userId, $bookName, $colorTag, $totalPage, $targetDate, $timestamp, $timestamp));
 
             if ($flag) {
                 // echo '<br>データが追加されました';
@@ -104,9 +209,10 @@ class ToReadDAO {
         $res = false;
         try {
             $this->connect();
-            $sql = 'UPDATE toread SET current_page=? WHERE toread_id=?';
+            $sql = 'UPDATE toread SET current_page=?, updated_at=? WHERE toread_id=?';
             $stmt = $this->dbh->prepare($sql);
-            $flag = $stmt->execute(array($newCurrentPage, $toreadId));
+            $timestamp = date('Y-m-d H:i:s');
+            $flag = $stmt->execute(array($newCurrentPage, $timestamp, $toreadId));
 
             if ($flag) {
                 // echo '<br>データが更新されました';

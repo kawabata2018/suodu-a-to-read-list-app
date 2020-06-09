@@ -4,6 +4,16 @@
 require_once 'templates/escape-func.php';
 require_once '../entity/ToRead.php';
 
+// definite sort types
+$sortTypes = array(
+    '0'  => '〆切順',
+    '1'  => '更新順',
+    '2'  => '書名順',
+    '80' => '青のみ',
+    '81' => '赤のみ',
+    '82' => '黄のみ',
+    '83' => '緑のみ',
+);
 // definite color tag
 $colorTypes = array(
     '0',    // blue
@@ -80,7 +90,23 @@ if (isset($_POST['submitAdd'])) {
 <div class="container">
     <p class="text-center font-yumin h4 mt-3"> 読みたい </p>
 
-    <button type="button" class="btn btn-info btn-round-2 rounded-circle p-0 m-2" data-toggle="modal" data-target="#addModal">＋</button>
+    <nav class="navbar">
+        <button type="button" class="btn btn-info btn-round-2 p-0 m-2 rounded-circle" data-toggle="modal" data-target="#addModal">＋</button>
+        <div class="dropdown navbar-right">
+            <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                並び替え
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?> "><?php echo $sortTypes['0'] ?></a>
+                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=1&id='.$_GET['id'] ?> "><?php echo $sortTypes['1'] ?></a>
+                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=2&id='.$_GET['id'] ?> "><?php echo $sortTypes['2'] ?></a>
+                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=80&id='.$_GET['id'] ?> "><?php echo $sortTypes['80'] ?></a>
+                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=81&id='.$_GET['id'] ?> "><?php echo $sortTypes['81'] ?></a>
+                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=82&id='.$_GET['id'] ?> "><?php echo $sortTypes['82'] ?></a>
+                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=83&id='.$_GET['id'] ?> "><?php echo $sortTypes['83'] ?></a>
+            </div>
+        </div>
+    </nav>
 
     <div class="border-reading-frame bg-white my-2">
 
@@ -97,7 +123,7 @@ if (isset($_POST['submitAdd'])) {
                                 <div class="mx-2">
                                     <span class="h5 font-yumin"><?php echo $reading->getBookName() ?></span>
                                 </div>
-                                <div class="mx-2 my-3" data-toggle="modal" data-target="#progressModal"
+                                <div class="mx-2 my-3 cursor-pointer" data-toggle="modal" data-target="#progressModal"
                                         data-toreadid=" <?php echo $reading->getToreadId(); ?> "
                                         data-currentpage=" <?php echo $reading->getCurrentPage(); ?> "
                                         data-totalpage=" <?php echo $reading->getTotalPage(); ?> ">
@@ -108,8 +134,8 @@ if (isset($_POST['submitAdd'])) {
                             </div>
                             <div class="col-12 col-md-2 pl-0">
                                 <div class="mx-2 text-right">
-                                    <span class="d-inline-block">あと</span>
-                                    <span class="d-inline-block"><?php echo $reading->getDaysToTargetDate() ?>日</span>
+                                    <span class="d-inline-block"><?php echo $reading->getIsOverdue()==true ? '超過': 'あと'; ?></span>
+                                    <span class="d-inline-block"><?php echo $reading->getDaysDiff(); ?>日</span>
                                 </div>
                             </div>
                         </div>
@@ -120,6 +146,7 @@ if (isset($_POST['submitAdd'])) {
         <?php } ?>
         
     </div>
+    <div class="font-yumin text-right pr-2"><?php echo $sortTypes[$_GET['sort']] ?></div>
 
 
     <div id="addModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true">
@@ -178,7 +205,7 @@ if (isset($_POST['submitAdd'])) {
                             <input type="range" id="range" name="rangeValue" class="form-control-range"
                                     min="0" max="" value="" step="1">
                         </div>
-                        <button type="submit" class="btn btn-primary">更新</button>
+                        <button type="submit" class="btn btn-info">更新</button>
                     </form>
                 </div>
             </div>

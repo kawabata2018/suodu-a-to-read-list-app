@@ -111,13 +111,26 @@ class ToRead {
         // return int (0-100)
         return floor(100 * $this->currentPage / $this->totalPage);
     }
-    public function getDaysToTargetDate() {
+    /**
+     * method to get the days between target date and today
+     * return non-negative integer
+     */
+    public function getDaysDiff() {
         $today = date('Y-m-d');
         $day1 = new DateTime($this->targetDate);
         $day2 = new DateTime($today);
         $diff = $day1->diff($day2);
-        // return int
         return $diff->days;
+    }
+    /**
+     * method to get whether or not overdue
+     * return true if overdue else false
+     */
+    public function getIsOverDue() {
+        $today = date('Y-m-d');
+        $day1 = new DateTime($this->targetDate);
+        $day2 = new DateTime($today);
+        return ($day1<$day2);
     }
 
 }

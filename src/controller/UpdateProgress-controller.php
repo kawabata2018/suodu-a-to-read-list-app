@@ -15,7 +15,7 @@ $res = $dao->updateProgress($toreadId, $newCurrentPage);
 
 if ($res) {
     // echo '<br>アカウントが更新されました。';
-    header('Location: /controller/Reading-controller?sort=0&id='.$userId);
+    header('Location: /controller/Reading-controller?sort=1&id='.$userId);
     exit;
 
 } else {

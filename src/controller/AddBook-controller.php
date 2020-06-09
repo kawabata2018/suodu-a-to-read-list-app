@@ -28,7 +28,7 @@ $dao = new ToReadDAO();
 
 $res = $dao->createToRead($userId, $bookName, $colorTag, $totalPage, $targetDate);
 if ($res) {
-    header('Location: /controller/Reading-controller?sort=0&id='.$userId);
+    header('Location: /controller/Reading-controller?sort=1&id='.$userId);
     exit;
 } else {
     // echo '<br>本の作成に失敗しました。';

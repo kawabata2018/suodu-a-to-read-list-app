@@ -6,25 +6,19 @@
     color: #7A4C43 !important;
 }
 
+.icon img {
+    width: 300px;
+    height: auto;
+    margin: 20px auto;
+    padding: 10px;
+}
+
 .font-yumin {
     font-family: "游明朝", "Yu Mincho", "YuMincho", serif !important;
 }
 
 .text-small {
     font-size: 0.8rem !important;
-}
-
-@media (min-width: 768px) {
-.responsive-text {
-    font-size: 1.25rem;
-}
-}
-
-.icon img {
-    width: 300px;
-    height: auto;
-    margin: 20px auto;
-    padding: 10px;
 }
 
 .cursor-pointer {

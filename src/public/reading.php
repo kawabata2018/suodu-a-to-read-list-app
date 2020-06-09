@@ -193,7 +193,7 @@ if (isset($_POST['submitAdd'])) {
             <div class="modal-content">
                 <div id="appProgress" class="container p-3">
                     <div class="h5 text-center">進捗度</div>
-                    <form method="GET" action="/controller/UpdateProgress-controller">
+                    <form method="POST" action="/controller/UpdateProgress-controller">
                         <input type="hidden" id="toreadId" name="toreadId">
                         <div class="form-group">
                             <label for="range">Progress:</label>

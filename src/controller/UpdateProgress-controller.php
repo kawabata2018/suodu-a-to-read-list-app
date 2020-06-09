@@ -7,8 +7,8 @@ session_start();
 $userId = $_SESSION['user_id'];
 
 // get user id
-$toreadId = $_GET['toreadId'];
-$newCurrentPage = $_GET['rangeValue'];
+$toreadId = $_POST['toreadId'];
+$newCurrentPage = $_POST['rangeValue'];
 
 $dao = new ToReadDAO();
 $res = $dao->updateProgress($toreadId, $newCurrentPage);

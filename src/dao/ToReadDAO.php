@@ -16,27 +16,62 @@ class ToReadDAO {
         $this->dbh = null;
     }
 
-    // public function getPassword($userId) {
-    //     try {
-    //         $sql = 'SELECT password FROM user WHERE user_id = ?';
-    //         $stmt = $this->dbh->prepare($sql);
-    //         $stmt->execute(array($userId));
-    //         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    //         if ($result == false) {
-    //             // echo '<br>DB処理でエラーが発生しました';
-    //             header('Location: /500');
-    //             exit;
-    //         } else {
-    //             return $result['password'];
-    //         }
-    //         $stmt = null;
+    public function getToReadByToReadId($toreadId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT * FROM toread WHERE toread_id = ?';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($toreadId));
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    //     } catch (Exception $e) {
-    //         // echo '<br>DB処理でエラーが発生しました';
-    //         header('Location: /500#db');
-    //         exit;
-    //     }
-    // }
+            $toread = new ToRead();
+            $toread->setToreadId($result['toread_id']);
+            $toread->setUserId($result['user_id']);
+            $toread->setIsCompleted($result['is_completed']);
+            $toread->setBookName($result['book_name']);
+            $toread->setAuthorName($result['author_name']);
+            $toread->setMemo($result['memo']);
+            $toread->setColorTag($result['color_tag']);
+            $toread->setTotalPage($result['total_page']);
+            $toread->setCurrentPage($result['current_page']);
+            $toread->setCompletedOn($result['completed_on']);
+            $toread->setTargetDate($result['target_date']);
+            $toread->setCreatedAt($result['created_at']);
+            $toread->setUpdatedAt($result['updated_at']);
+            $toread->setDeleteFlag($result['delete_flag']);
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $toread;
+    }
+
+    public function checkIfAuthorized($toreadId, $userId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT COUNT(toread_id) FROM toread WHERE toread_id = ? AND user_id = ?';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($toreadId, $userId));
+            $count = (int) $stmt->fetchColumn();
+            if ($count == 0) {
+                return false;
+            } else {
+                return true;
+            }
+            $stmt = null;
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+    }
 
     public function getAllReadingOrderByTargetDate($searchId) {
         try {
@@ -48,19 +83,19 @@ class ToReadDAO {
             $stmt->execute(array($searchId));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $toReadArray = array();
+            $toreadArray = array();
             foreach ($result as $record) {
-                $toRead = new ToRead();
-                $toRead->setToreadId($record['toread_id']);
-                $toRead->setBookName($record['book_name']);
-                $toRead->setAuthorName($record['author_name']);
-                $toRead->setMemo($record['memo']);
-                $toRead->setColorTag($record['color_tag']);
-                $toRead->setTotalPage($record['total_page']);
-                $toRead->setCurrentPage($record['current_page']);
-                $toRead->setTargetDate($record['target_date']);
-                // add to toReadArray
-                $toReadArray[] = $toRead;
+                $toread = new ToRead();
+                $toread->setToreadId($record['toread_id']);
+                $toread->setBookName($record['book_name']);
+                $toread->setAuthorName($record['author_name']);
+                $toread->setMemo($record['memo']);
+                $toread->setColorTag($record['color_tag']);
+                $toread->setTotalPage($record['total_page']);
+                $toread->setCurrentPage($record['current_page']);
+                $toread->setTargetDate($record['target_date']);
+                // add to toreadArray
+                $toreadArray[] = $toread;
             }
 
         } catch (Exception $e) {
@@ -70,7 +105,7 @@ class ToReadDAO {
         } finally {
             $this->close();
         }
-        return $toReadArray;
+        return $toreadArray;
     }
 
     public function getAllReadingOrderByUpdatedAt($searchId) {
@@ -83,19 +118,19 @@ class ToReadDAO {
             $stmt->execute(array($searchId));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $toReadArray = array();
+            $toreadArray = array();
             foreach ($result as $record) {
-                $toRead = new ToRead();
-                $toRead->setToreadId($record['toread_id']);
-                $toRead->setBookName($record['book_name']);
-                $toRead->setAuthorName($record['author_name']);
-                $toRead->setMemo($record['memo']);
-                $toRead->setColorTag($record['color_tag']);
-                $toRead->setTotalPage($record['total_page']);
-                $toRead->setCurrentPage($record['current_page']);
-                $toRead->setTargetDate($record['target_date']);
-                // add to toReadArray
-                $toReadArray[] = $toRead;
+                $toread = new ToRead();
+                $toread->setToreadId($record['toread_id']);
+                $toread->setBookName($record['book_name']);
+                $toread->setAuthorName($record['author_name']);
+                $toread->setMemo($record['memo']);
+                $toread->setColorTag($record['color_tag']);
+                $toread->setTotalPage($record['total_page']);
+                $toread->setCurrentPage($record['current_page']);
+                $toread->setTargetDate($record['target_date']);
+                // add to toreadArray
+                $toreadArray[] = $toread;
             }
 
         } catch (Exception $e) {
@@ -105,7 +140,7 @@ class ToReadDAO {
         } finally {
             $this->close();
         }
-        return $toReadArray;
+        return $toreadArray;
     }
 
     public function getAllReadingOrderByBookName($searchId) {
@@ -118,19 +153,19 @@ class ToReadDAO {
             $stmt->execute(array($searchId));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $toReadArray = array();
+            $toreadArray = array();
             foreach ($result as $record) {
-                $toRead = new ToRead();
-                $toRead->setToreadId($record['toread_id']);
-                $toRead->setBookName($record['book_name']);
-                $toRead->setAuthorName($record['author_name']);
-                $toRead->setMemo($record['memo']);
-                $toRead->setColorTag($record['color_tag']);
-                $toRead->setTotalPage($record['total_page']);
-                $toRead->setCurrentPage($record['current_page']);
-                $toRead->setTargetDate($record['target_date']);
-                // add to toReadArray
-                $toReadArray[] = $toRead;
+                $toread = new ToRead();
+                $toread->setToreadId($record['toread_id']);
+                $toread->setBookName($record['book_name']);
+                $toread->setAuthorName($record['author_name']);
+                $toread->setMemo($record['memo']);
+                $toread->setColorTag($record['color_tag']);
+                $toread->setTotalPage($record['total_page']);
+                $toread->setCurrentPage($record['current_page']);
+                $toread->setTargetDate($record['target_date']);
+                // add to toreadArray
+                $toreadArray[] = $toread;
             }
 
         } catch (Exception $e) {
@@ -140,7 +175,7 @@ class ToReadDAO {
         } finally {
             $this->close();
         }
-        return $toReadArray;
+        return $toreadArray;
     }
 
     public function getAllReadingOrderByColorTag($searchId, $colorTag) {
@@ -153,19 +188,19 @@ class ToReadDAO {
             $stmt->execute(array($searchId, $colorTag));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $toReadArray = array();
+            $toreadArray = array();
             foreach ($result as $record) {
-                $toRead = new ToRead();
-                $toRead->setToreadId($record['toread_id']);
-                $toRead->setBookName($record['book_name']);
-                $toRead->setAuthorName($record['author_name']);
-                $toRead->setMemo($record['memo']);
-                $toRead->setColorTag($record['color_tag']);
-                $toRead->setTotalPage($record['total_page']);
-                $toRead->setCurrentPage($record['current_page']);
-                $toRead->setTargetDate($record['target_date']);
-                // add to toReadArray
-                $toReadArray[] = $toRead;
+                $toread = new ToRead();
+                $toread->setToreadId($record['toread_id']);
+                $toread->setBookName($record['book_name']);
+                $toread->setAuthorName($record['author_name']);
+                $toread->setMemo($record['memo']);
+                $toread->setColorTag($record['color_tag']);
+                $toread->setTotalPage($record['total_page']);
+                $toread->setCurrentPage($record['current_page']);
+                $toread->setTargetDate($record['target_date']);
+                // add to toreadArray
+                $toreadArray[] = $toread;
             }
 
         } catch (Exception $e) {
@@ -175,7 +210,7 @@ class ToReadDAO {
         } finally {
             $this->close();
         }
-        return $toReadArray;
+        return $toreadArray;
     }
 
     public function createToRead($userId, $bookName, $colorTag, $totalPage, $targetDate) {

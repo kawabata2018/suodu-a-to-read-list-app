@@ -28,13 +28,10 @@ $bookImgPath = array(
     '3' => '/public/img/book_03.png',
 );
 
-// get query parameters
-$searchId = $_GET['id'];
-
 // get session values
 session_start();
 $userId = $_SESSION['user_id'];
-$toReadSearchResult = $_SESSION['toread_search_result'];
+$toreadSearchResult = $_SESSION['toread_search_result'];
 
 // unset session values
 unset($_SESSION['book_name']);
@@ -110,7 +107,7 @@ if (isset($_POST['submitAdd'])) {
 
     <div class="border-reading-frame bg-white my-2">
 
-        <?php foreach ($toReadSearchResult as $reading) { ?>
+        <?php foreach ($toreadSearchResult as $reading) { ?>
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">

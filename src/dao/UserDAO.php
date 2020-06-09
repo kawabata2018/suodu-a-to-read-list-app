@@ -19,7 +19,7 @@ class UserDAO {
     public function userExistsOrNot($userId) {
         try {
             $this->connect();
-            $sql = 'SELECT COUNT(*) FROM user WHERE user_id = ?';
+            $sql = 'SELECT COUNT(user_id) FROM user WHERE user_id = ?';
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute(array($userId));
             $count = (int) $stmt->fetchColumn();
@@ -126,7 +126,7 @@ class UserDAO {
         $res = false;
         try {
             $this->connect();
-            $sql = 'UPDATE user SET user_name=?, profile=?, `is_protected`=? WHERE user_id=?';
+            $sql = 'UPDATE user SET user_name = ?, profile = ?, `is_protected` = ? WHERE user_id = ?';
             $stmt = $this->dbh->prepare($sql);
             $stmt->bindParam(1, $userName);
             $stmt->bindParam(2, $profile);

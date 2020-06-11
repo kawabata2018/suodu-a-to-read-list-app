@@ -63,13 +63,13 @@ if (isset($_POST['submit'])) {
                 <form method="POST">
                     <div class="form-group pb-1">
                         <label>読者ID</label>
-                        <input type="text" name="id" class="form-control border-login" placeholder="yomi64"></input>
+                        <input type="text" name="id" class="form-control border-login" placeholder=""></input>
                         <span class="text-danger"> <?php echo $errors['id']; ?> </span>
                         <span class="text-danger"> <?php echo $invalidIdError; ?> </span>
                     </div>
                     <div class="form-group pb-5">
                         <label>あいことば</label>
-                        <input type="password" name="password" class="form-control border-login" placeholder="******"></input>
+                        <input type="password" name="password" class="form-control border-login" placeholder=""></input>
                         <span class="text-danger"> <?php echo $errors['password']; ?> </span>
                         <span class="text-danger"> <?php echo $invalidPasswordError; ?> </span>
                     </div>

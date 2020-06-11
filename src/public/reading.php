@@ -4,6 +4,12 @@
 require_once 'templates/escape-func.php';
 require_once '../entity/ToRead.php';
 
+// if id is not set, move to own reading page
+if ((!isset($_GET['id'])) || $_GET['id']=='') {
+    header('Location: /controller/Reading-controller?sort=0&id='.$_SESSION['user_id']);
+    exit;
+}
+
 // definite sort types
 $sortTypes = array(
     '0'  => '〆切順',
@@ -27,6 +33,9 @@ $bookImgPath = array(
     '2' => '/public/img/book_02.png',
     '3' => '/public/img/book_03.png',
 );
+
+// declare empty array to prevent foreach null exception
+$toreadSearchResult = array();
 
 // get session values
 session_start();
@@ -107,11 +116,11 @@ if (isset($_POST['submitAdd'])) {
 
     <div class="border-reading-frame bg-white my-2">
 
-        <?php foreach ($toreadSearchResult as $reading) { ?>
+        <?php foreach ($toreadSearchResult as $index=>$reading) { ?>
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
-                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center">
+                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index=" <?php echo $index; ?> ">
                         <img src=" <?php echo $bookImgPath[$reading->getColorTag()] ?> " style="width:100%; ">
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11">
@@ -192,7 +201,7 @@ if (isset($_POST['submitAdd'])) {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div id="appProgress" class="container p-3">
-                    <div class="h5 text-center">進捗度</div>
+                    <div class="h5 font-yumin text-center mb-4">進捗度</div>
                     <form method="POST" action="/controller/UpdateProgress-controller">
                         <input type="hidden" id="toreadId" name="toreadId">
                         <div class="form-group">
@@ -204,6 +213,40 @@ if (isset($_POST['submitAdd'])) {
                         </div>
                         <button type="submit" class="btn btn-info">更新</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div id="appDetail" class="container p-3">
+                    <div class="h5 font-yumin text-center mb-4">詳細</div>
+                    <table class="table table-bordered table-striped custom-table">
+                        <tbody>
+                        <tr>
+                            <th class="font-yumin">書名</th>
+                            <td><?php echo $toreadSearchResult[0]->getBookName(); ?></td>
+                        </tr>
+                        <tr>
+                            <th class="font-yumin">作者名</th>
+                            <td><?php echo $toreadSearchResult[0]->getAuthorName(); ?></td>
+                        </tr>
+                        <tr>
+                            <th class="font-yumin">進捗度</th>
+                            <td><?php echo $toreadSearchResult[0]->getCurrentPage(); ?> / <?php echo $toreadSearchResult[0]->getTotalPage(); ?></td>
+                        </tr>
+                        <tr>
+                            <th class="font-yumin">目標</th>
+                            <td><?php echo $toreadSearchResult[0]->getTargetDate(); ?> まで</td>
+                        </tr>
+                        <tr>
+                            <th class="font-yumin">メモ</th>
+                            <td><?php echo $toreadSearchResult[0]->getMemo(); ?></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

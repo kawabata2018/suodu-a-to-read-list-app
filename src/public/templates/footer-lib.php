@@ -32,6 +32,7 @@
 			let currentpage = parseInt(button.data('currentpage'));
 			let totalpage = parseInt(button.data('totalpage'));
 			let modal = $(this);
+			modal.find('form')[0].reset();
 			modal.find('#range').attr('value', currentpage);
 			modal.find('#range').attr('max', totalpage);
 			modal.find('#rangeMax').html("/ " + totalpage);
@@ -44,6 +45,22 @@
 				$('#rangeValue').html($(this).val());
 			});
 		})
+
+		// $('#detailModal').on('show.bs.modal', function (event) {
+		// 	let button = $(event.relatedTarget);
+		// 	let index = parseInt(button.data('index'));
+		// 	let modal = $(this);
+			
+		// 	$.ajax({
+		// 		cache: false,
+		// 		type: 'POST',
+		// 		url: '/public/reading.php',
+		// 		data: 'index=' + index,
+		// 		success: function(data) {
+		// 			$modal.find(#appDetail).html(data);
+		// 		}
+		// 	});
+		// })
 
 		new Vue({
 			el: '#appAdd',

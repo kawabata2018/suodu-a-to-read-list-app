@@ -76,3 +76,20 @@
     background-color: #CCC !important;
     color: #555 !important;
 }
+
+.custom-table tbody{
+    border: 2px solid #7A4C43;
+}
+.custom-table th {
+    background-color: #A8E437;
+    width: 30%;
+}
+.custom-table td, .custom-table th {
+    padding-bottom: 5px;
+}
+@media (max-width: 360px) {
+.custom-table td, .custom-table th {
+    width: 100%;
+    display: block;
+}
+}

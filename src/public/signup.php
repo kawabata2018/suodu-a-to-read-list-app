@@ -67,18 +67,18 @@ if (isset($_POST['submit'])) {
                 <div class="form-group pb-1">
                     <label>読者ID（英数4-12文字）<span class="text-small">*IDは変更できません</span> </label>
                     <input type="text" name="id" class="form-control border-login" placeholder=""></input>
-                    <span class="text-danger"> <?php echo $errors['id']; ?> </span>
-                    <span class="text-danger"> <?php echo $userExistsError; ?> </span>
+                    <span class="text-danger"> <?= $errors['id']; ?> </span>
+                    <span class="text-danger"> <?= $userExistsError; ?> </span>
                 </div>
                 <div class="form-group pb-1">
                     <label>あいことば（英数4-12文字）</label>
                     <input type="password" name="password1" class="form-control border-login" placeholder=""></input>
-                    <span class="text-danger"> <?php echo $errors['password1']; ?> </span>
+                    <span class="text-danger"> <?= $errors['password1']; ?> </span>
                 </div>
                 <div class="form-group pb-5">
                     <label>あいことば（確認）</label>
                     <input type="password" name="password2" class="form-control border-login" placeholder=""></input>
-                    <span class="text-danger"> <?php echo $errors['password2']; ?> </span>
+                    <span class="text-danger"> <?= $errors['password2']; ?> </span>
                 </div>
                 <button type="submit" name="submit" class="btn btn-icon-navy">登録</button>
             </form>

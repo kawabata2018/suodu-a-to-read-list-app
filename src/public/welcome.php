@@ -70,12 +70,12 @@ if (isset($_POST['submit'])) {
                 <div class="form-group pb-1">
                     <label>読者名（20字以内）</label>
                     <textarea type="text" name="name" class="form-control border-login" rows="1" placeholder="よみむし"></textarea>
-                    <span class="text-danger"> <?php echo $errors['name']; ?> </span>
+                    <span class="text-danger"> <?= $errors['name']; ?> </span>
                 </div>
                 <div class="form-group pb-1">
                     <label>自己紹介（100字以内）</label>
                     <textarea type="text" name="profile" class="form-control border-login" rows="4" placeholder="よみむしくんは本の虫"></textarea>
-                    <span class="text-danger"> <?php echo $errors['profile']; ?> </span>
+                    <span class="text-danger"> <?= $errors['profile']; ?> </span>
                 </div>
                 <!-- <div class="form-group pb-1">
                     <label class="text-muted">アイコン選択（coming soon ...）</label>
@@ -90,7 +90,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container p-3 p-md-4 bg-beige-login border-login">
                 <span class="d-inline-block">プロフィール登録はスキップできます</span>
-                <span class="d-inline-block"><a href="<?php echo '/public/aboutme?id='.$userId; ?>">あとで</a></span>
+                <span class="d-inline-block"><a href="<?= '/public/aboutme?id='.$userId; ?>">あとで</a></span>
             </div>
         </div>
     </div>

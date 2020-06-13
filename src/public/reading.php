@@ -38,12 +38,6 @@ if (!isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $toreadSearchResult = $_SESSION['toread_search_result'];
 
-// unset session values
-unset($_SESSION['book_name']);
-unset($_SESSION['total_page']);
-unset($_SESSION['target_date']);
-unset($_SESSION['color_tag']);
-
 // if id is not set, move to own reading page
 if ((!isset($_GET['id'])) || $_GET['id']=='') {
     header('Location: /controller/Reading-controller?sort=0&id='.$_SESSION['user_id']);
@@ -61,7 +55,7 @@ if (isset($_POST['submitAdd'])) {
     $colorTag = $_POST['colorTag'];
 
     // check totalPage
-    if (! empty($targetDate)) {
+    if (! empty($totalPage)) {
         if (! preg_match('/^[0-9].{0,6}$/', $totalPage)) {
             header('Location: /500#invalidform');
             exit;
@@ -105,13 +99,13 @@ if (isset($_POST['submitAdd'])) {
                 並び替え
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?>"><?php echo $sortTypes['0'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=1&id='.$_GET['id'] ?>"><?php echo $sortTypes['1'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=2&id='.$_GET['id'] ?>"><?php echo $sortTypes['2'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=80&id='.$_GET['id'] ?>"><?php echo $sortTypes['80'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=81&id='.$_GET['id'] ?>"><?php echo $sortTypes['81'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=82&id='.$_GET['id'] ?>"><?php echo $sortTypes['82'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=83&id='.$_GET['id'] ?>"><?php echo $sortTypes['83'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?>"><?= $sortTypes['0'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Reading-controller?sort=1&id='.$_GET['id'] ?>"><?= $sortTypes['1'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Reading-controller?sort=2&id='.$_GET['id'] ?>"><?= $sortTypes['2'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Reading-controller?sort=80&id='.$_GET['id'] ?>"><?= $sortTypes['80'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Reading-controller?sort=81&id='.$_GET['id'] ?>"><?= $sortTypes['81'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Reading-controller?sort=82&id='.$_GET['id'] ?>"><?= $sortTypes['82'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Reading-controller?sort=83&id='.$_GET['id'] ?>"><?= $sortTypes['83'] ?></a>
             </div>
         </div>
     </nav>
@@ -128,28 +122,28 @@ if (isset($_POST['submitAdd'])) {
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
-                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?php echo $index; ?>">
-                        <img src="<?php echo $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
+                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?= $index; ?>">
+                        <img src="<?= $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11">
                         <div class="row">
                             <div class="col-12 col-md-10">
                                 <div class="mx-2">
-                                    <span class="h5 font-yumin"><?php echo $reading->getBookName() ?></span>
+                                    <span class="h5 font-yumin"><?= $reading->getBookName() ?></span>
                                 </div>
                                 <div class="mx-2 my-3 cursor-pointer" data-toggle="modal" data-target="#progressModal"
-                                        data-toreadid="<?php echo $reading->getToreadId(); ?>"
-                                        data-currentpage="<?php echo $reading->getCurrentPage(); ?>"
-                                        data-totalpage="<?php echo $reading->getTotalPage(); ?>">
+                                        data-toreadid="<?= $reading->getToreadId(); ?>"
+                                        data-currentpage="<?= $reading->getCurrentPage(); ?>"
+                                        data-totalpage="<?= $reading->getTotalPage(); ?>">
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $reading->getProgressPct() ?>%"><?php echo $reading->getProgressPct() ?>%</div>
+                                        <div class="progress-bar" role="progressbar" style="width: <?= $reading->getProgressPct() ?>%"><?= $reading->getProgressPct() ?>%</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-2 pl-0">
                                 <div class="mx-2 text-right">
-                                    <span class="d-inline-block"><?php echo $reading->getIsOverdue()==true ? '超過': 'あと'; ?></span>
-                                    <span class="d-inline-block"><?php echo $reading->getDaysDiff(); ?>日</span>
+                                    <span class="d-inline-block"><?= $reading->getIsOverdue()==true ? '超過': 'あと'; ?></span>
+                                    <span class="d-inline-block"><?= $reading->getDaysDiff(); ?>日</span>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +154,7 @@ if (isset($_POST['submitAdd'])) {
         <?php } ?>
         
     </div>
-    <div class="font-yumin text-right pr-2"><?php echo $sortTypes[$_GET['sort']] ?></div>
+    <div class="font-yumin text-right pr-2"><?= $sortTypes[$_GET['sort']] ?></div>
     <?php } ?>
 
 
@@ -172,7 +166,7 @@ if (isset($_POST['submitAdd'])) {
                     <form method="POST">
                         <div class="form-group pb-1">
                             <label>書名（50字以内）</label>
-                            <textarea type="text" name="bookName" v-model="bookName" class="form-control border-login" rows="2"></textarea>
+                            <textarea type="text" name="bookName" v-model="bookName" class="form-control border-login" rows="1"></textarea>
                             <span class="text-danger">{{ error.bookName }}</span>
                         </div>
                         <div class="form-row pb-1">

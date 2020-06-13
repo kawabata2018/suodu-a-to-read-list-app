@@ -55,13 +55,13 @@ mb_regex_encoding("UTF-8");
                 並び替え
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>"><?php echo $sortTypes['0'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=1&id='.$_GET['id'] ?>"><?php echo $sortTypes['1'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=2&id='.$_GET['id'] ?>"><?php echo $sortTypes['2'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=80&id='.$_GET['id'] ?>"><?php echo $sortTypes['80'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=81&id='.$_GET['id'] ?>"><?php echo $sortTypes['81'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=82&id='.$_GET['id'] ?>"><?php echo $sortTypes['82'] ?></a>
-                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=83&id='.$_GET['id'] ?>"><?php echo $sortTypes['83'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>"><?= $sortTypes['0'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Library-controller?sort=1&id='.$_GET['id'] ?>"><?= $sortTypes['1'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Library-controller?sort=2&id='.$_GET['id'] ?>"><?= $sortTypes['2'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Library-controller?sort=80&id='.$_GET['id'] ?>"><?= $sortTypes['80'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Library-controller?sort=81&id='.$_GET['id'] ?>"><?= $sortTypes['81'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Library-controller?sort=82&id='.$_GET['id'] ?>"><?= $sortTypes['82'] ?></a>
+                <a class="dropdown-item" href="<?= '/controller/Library-controller?sort=83&id='.$_GET['id'] ?>"><?= $sortTypes['83'] ?></a>
             </div>
         </div>
     </nav>
@@ -77,23 +77,23 @@ mb_regex_encoding("UTF-8");
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
-                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?php echo $index; ?>">
-                        <img src="<?php echo $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
+                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?= $index; ?>">
+                        <img src="<?= $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11">
                         <div class="row">
                             <div class="col-12 col-md-10">
                                 <div class="mx-2">
-                                    <span class="h5 font-yumin inline-block"><?php echo $reading->getBookName() ?></span>
-                                    <span class="font-yumin inline-block"><?php echo $reading->getAuthorName() ?></span>
+                                    <span class="h5 font-yumin inline-block"><?= $reading->getBookName() ?></span>
+                                    <span class="font-yumin inline-block"><?= $reading->getAuthorName() ?></span>
                                 </div>
                                 <div class="m-2">
-                                    <span class=""><?php echo nl2br($reading->getMemo()) ?></span>
+                                    <span class=""><?= nl2br($reading->getMemo()) ?></span>
                                 </div>
                             </div>
                             <div class="col-12 col-md-2 pl-0">
                                 <div class="mx-2 text-right">
-                                    <span class="d-inline-block"><?php echo date('Y月n月d日', strtotime($reading->getCompletedOn())); ?></span>
+                                    <span class="d-inline-block"><?= date('n月d日', strtotime($reading->getCompletedOn())); ?></span>
                                     <span class="d-inline-block">読了</span>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@ mb_regex_encoding("UTF-8");
         <?php } ?>
         
     </div>
-    <div class="font-yumin text-right pr-2"><?php echo $sortTypes[$_GET['sort']] ?></div>
+    <div class="font-yumin text-right pr-2"><?= $sortTypes[$_GET['sort']] ?></div>
     <?php } ?>
 
 </div>

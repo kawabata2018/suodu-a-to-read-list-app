@@ -15,29 +15,28 @@ $record = $toreadSearchResult[$_POST['index']];
     <tbody>
     <tr>
         <th class="font-yumin">書名</th>
-        <td><?php echo $record->getBookName(); ?></td>
+        <td><?= $record->getBookName(); ?></td>
     </tr>
     <tr>
         <th class="font-yumin">作者名</th>
-        <td><?php echo $record->getAuthorName(); ?></td>
+        <td><?= $record->getAuthorName(); ?></td>
     </tr>
     <tr>
         <th class="font-yumin">進捗度</th>
-        <td><?php echo $record->getCurrentPage() . " / " . $record->getTotalPage(); ?></td>
+        <td><?= $record->getCurrentPage() . " / " . $record->getTotalPage(); ?></td>
     </tr>
     <tr>
         <th class="font-yumin">目標</th>
-        <td><?php echo $record->getTargetDate(); ?> まで</td>
+        <td><?= $record->getTargetDate(); ?> まで</td>
     </tr>
     <tr>
         <th class="font-yumin">メモ</th>
-        <td><?php echo $record->getMemo(); ?></td>
+        <td><?= nl2br($record->getMemo()); ?></td>
     </tr>
     </tbody>
 </table>
-<form method="POST" action="/public/edit-reading">
-    <input type="hidden" name="toreadId" value="<?php echo $record->getToreadId(); ?>">
+<form method="POST" action="/public/edit-toread?toreadId=<?= $record->getToreadId(); ?>">
     <button type="submit" class="btn btn-icon-navy m-2">編集</button>
     <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">閉じる</button>
-    <button type="button" class="btn btn-icon-red float-right m-2" onClick="finishReading(<?php echo $record->getToreadId(); ?>)">読了</button>
+    <button type="button" class="btn btn-icon-red float-right m-2" onClick="finishReading(<?= $record->getToreadId(); ?>)">読了</button>
 </form>

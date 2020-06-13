@@ -155,6 +155,68 @@ class ToReadDAO {
         return $res;
     }
 
+    public function deleteToread($toreadId) {
+        $res = false;
+        try {
+            $this->connect();
+            $sql = 'UPDATE toread SET updated_at = ?, delete_flag = true WHERE toread_id = ?';
+            $stmt = $this->dbh->prepare($sql);
+            $timestamp = date('Y-m-d H:i:s');
+            $flag = $stmt->execute(array($timestamp, $toreadId));
+
+            if ($flag) {
+                // echo '<br>データが更新されました';
+                $res = true;
+            } else {
+                // echo '<br>データの更新に失敗しました';
+                $res = false;
+            }
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $res;
+    }
+
+    public function updateToRead($toreadId, $bookName, $authorName, $memo, $colorTag, $totalPage, $targetDate) {
+        $res = false;
+        try {
+            $this->connect();
+            $sql = 'UPDATE toread
+                    SET book_name = ?, author_name = ?, memo = ?, color_tag = ?, total_page = ?, target_date = ?
+                    WHERE toread_id = ?';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->bindParam(1, $bookName);
+            $stmt->bindParam(2, $authorName);
+            $stmt->bindParam(3, $memo);
+            $stmt->bindParam(4, $colorTag);
+            $stmt->bindParam(5, $totalPage);
+            $stmt->bindParam(6, $targetDate);
+            $stmt->bindParam(7, $toreadId);
+            $flag = $stmt->execute();
+
+            if ($flag) {
+                // echo '<br>データが更新されました';
+                $res = true;
+            } else {
+                // echo '<br>データの更新に失敗しました';
+                $res = false;
+            }
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $res;
+    }
+
     public function getAllReadingOrderByTargetDate($searchId) {
         try {
             $this->connect();
@@ -434,34 +496,6 @@ class ToReadDAO {
         }
         return $toreadArray;
     }
-
-    // public function updateUserWelcome($userId, $userName, $profile, $isProtected) {
-    //     $res = false;
-    //     try {
-    //         $sql = 'UPDATE user SET user_name=?, profile=?, `is_protected`=? WHERE user_id=?';
-    //         $stmt = $this->dbh->prepare($sql);
-    //         $stmt->bindParam(1, $userName);
-    //         $stmt->bindParam(2, $profile);
-    //         $stmt->bindParam(3, $isProtected, PDO::PARAM_BOOL);
-    //         $stmt->bindParam(4, $userId);
-    //         $flag = $stmt->execute();
-
-    //         if ($flag) {
-    //             // echo '<br>データが更新されました';
-    //             $res = true;
-    //         } else {
-    //             // echo '<br>データの更新に失敗しました';
-    //             $res = false;
-    //         }
-
-    //     } catch (Exception $e) {
-    //         // echo '<br>DB処理でエラーが発生しました';
-    //         header('Location: /500#db');
-    //         exit;
-    //     }
-    //     return $res;
-    // }
-
 
 }
 

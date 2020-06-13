@@ -60,31 +60,30 @@ if (isset($_POST['submit'])) {
 
 <?php include('templates/header-nobtn.php'); ?>
 
-<div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
+<div class="h4 font-yumin text-center m-3">プロフィールを編集</div>
+<div class="mb-5 d-md-flex flex-items-center gutter-md-spacious">
     <div class="container p-3 p-md-4">
-
-    <form method="POST">
-        <div class="form-group pb-1">
-            <label>読者名（20字以内）</label>
-            <textarea type="text" name="name" class="form-control border-login" rows="1"><?php echo $user->getUserName(); ?></textarea>
-            <span class="text-danger"> <?php echo $errors['name']; ?> </span>
-        </div>
-        <div class="form-group pb-1">
-            <label>自己紹介（100字以内）</label>
-            <textarea type="text" name="profile" class="form-control border-login" rows="4"><?php echo $user->getProfile(); ?></textarea>
-            <span class="text-danger"> <?php echo $errors['profile']; ?> </span>
-        </div>
-        <!-- <div class="form-group pb-1">
-            <label class="text-muted">アイコン選択（coming soon ...）</label>
-        </div> -->
-        <div class="form-group custom-control custom-checkbox pb-1">
-            <input type="checkbox" class="custom-control-input" id="publishOrNot" name="publishOrNot">
-            <label class="custom-control-label" for="publishOrNot">自分の書庫を公開する</label>
-        </div>
-        <button type="submit" name="submit" class="btn btn-icon-navy m-2">更新</button>
-        <button type="button" class="btn btn-secondary m-2" onClick="location.href=' <?php echo '/public/aboutme?id='.$userId; ?> '">戻る</button>
-    </form>
-
+        <form method="POST">
+            <div class="form-group pb-1">
+                <label>読者名（20字以内）</label>
+                <textarea type="text" name="name" class="form-control border-login" rows="1"><?= $user->getUserName(); ?></textarea>
+                <span class="text-danger"> <?= $errors['name']; ?> </span>
+            </div>
+            <div class="form-group pb-1">
+                <label>自己紹介（100字以内）</label>
+                <textarea type="text" name="profile" class="form-control border-login" rows="4"><?= $user->getProfile(); ?></textarea>
+                <span class="text-danger"> <?= $errors['profile']; ?> </span>
+            </div>
+            <!-- <div class="form-group pb-1">
+                <label class="text-muted">アイコン選択（coming soon ...）</label>
+            </div> -->
+            <div class="form-group custom-control custom-checkbox pb-1">
+                <input type="checkbox" class="custom-control-input" id="publishOrNot" name="publishOrNot">
+                <label class="custom-control-label" for="publishOrNot">自分の書庫を公開する</label>
+            </div>
+            <button type="submit" name="submit" class="btn btn-icon-navy m-2">更新</button>
+            <button type="button" class="btn btn-secondary m-2" onClick="location.href=' <?= '/public/aboutme?id='.$userId; ?> '">戻る</button>
+        </form>
     </div>
 </div>
 

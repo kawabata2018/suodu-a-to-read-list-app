@@ -64,14 +64,14 @@ if (isset($_POST['submit'])) {
                     <div class="form-group pb-1">
                         <label>読者ID</label>
                         <input type="text" name="id" class="form-control border-login" placeholder=""></input>
-                        <span class="text-danger"> <?php echo $errors['id']; ?> </span>
-                        <span class="text-danger"> <?php echo $invalidIdError; ?> </span>
+                        <span class="text-danger"> <?= $errors['id']; ?> </span>
+                        <span class="text-danger"> <?= $invalidIdError; ?> </span>
                     </div>
                     <div class="form-group pb-5">
                         <label>あいことば</label>
                         <input type="password" name="password" class="form-control border-login" placeholder=""></input>
-                        <span class="text-danger"> <?php echo $errors['password']; ?> </span>
-                        <span class="text-danger"> <?php echo $invalidPasswordError; ?> </span>
+                        <span class="text-danger"> <?= $errors['password']; ?> </span>
+                        <span class="text-danger"> <?= $invalidPasswordError; ?> </span>
                     </div>
                     <button type="submit" name="submit" class="btn btn-icon-navy">入庫</button>
                 </form>

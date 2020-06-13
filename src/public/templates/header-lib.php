@@ -23,13 +23,13 @@
         <div class="collapse navbar-collapse" id="Mydropdown">
             <ul class="nav navbar-nav flex-row-md ml-auto">
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href="<?php echo '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読みたい</a>
+                    <a href="<?= '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読みたい</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href="<?php echo '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読んだ</a>
+                    <a href="<?= '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読んだ</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href="<?php echo '/public/aboutme?id='.$_GET['id'] ?>" class="nav-link">じぶん</a>
+                    <a href="<?= '/public/aboutme?id='.$_GET['id'] ?>" class="nav-link">じぶん</a>
                 </li>
                 <li onClick="signOut()" class="nav-item pl-md-5 pr-md-2 cursor-pointer ">
                     <a class="nav-link" >ログアウト</a>

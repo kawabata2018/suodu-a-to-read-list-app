@@ -35,21 +35,21 @@ $user = $dao->getUser($userId);
 
 <div class="container">
     <p class="text-center font-yumin h4 mt-3">
-        <?php echo $user->getUserName(); ?>さんの書庫
+        <?= $user->getUserName(); ?>さんの書庫
         <?php if ($user->getIsProtected() == 1) { ?>
             🔑
         <?php } ?>
     </p>
-    <p class="text-center mt-2"> <?php echo $user->getProfile(); ?> </p>
+    <p class="text-center mt-2"> <?= $user->getProfile(); ?> </p>
 
     <div class="icon text-center">
         <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
     </div>
 
-    <p class="text-center mt-0">created at <?php echo $user->getCreatedAt(); ?> </p>
+    <p class="text-center mt-0">joined at <?= $user->getCreatedAt(); ?> </p>
 
     <div class="text-right">
-        <button type="submit" class="btn btn-icon-green" onClick="location.href=' <?php echo '/public/edit-aboutme?id='.$userId; ?> '">編集</button>
+        <button type="submit" class="btn btn-icon-green" onClick="location.href=' <?= '/public/edit-aboutme?id='.$userId; ?> '">編集</button>
     </div>
 </div>
 

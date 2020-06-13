@@ -19,7 +19,7 @@
 
 		function finishReading(num) {
 			var toreadId = parseInt(num);
-			var res = confirm('「読了」にしますか？ OKを押すと「読んだ」の本棚に移動します。');
+			var res = confirm('OKを押すと「読んだ」の本棚に移動します。');
 			if (res) {
 				location.replace('/controller/FinishReading-controller?toreadId='+toreadId);
 			}
@@ -98,9 +98,9 @@
 				totalPage:
 					function(val) {
 						if (val <= 0 || val >= 1000000) {
-							this.error.totalpage = '6桁以内の数値で入力してね'
+							this.error.totalPage = '6桁以内の数値で入力してね'
 						} else {
-							this.error.totalpage = ''
+							this.error.totalPage = ''
 						}
 				},
 				error: {

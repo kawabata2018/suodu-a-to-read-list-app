@@ -9,6 +9,11 @@ mb_regex_encoding("UTF-8");
 
 // get session values
 session_start();
+// if session has expired, move to login page
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /408');
+    exit;
+}
 $userId = $_SESSION['user_id'];
 
 // get account information
@@ -20,7 +25,7 @@ $user = $dao->getUser($userId);
 
 <?php include('templates/header-lib.php'); ?>
 
-<!-- <nav class="navbar p-2 navbar-light bg-green-login z-depth-0">
+<!-- <nav class="navbar p-2 navbar-light bg-icon-green z-depth-0">
     <div class="container">
         <ul class="navbar-nav">
             <button onClick="signOut()" class="btn btn-sm btn-outline-dark navbar-btn navbar-right lign-middle">Sign out</button>
@@ -39,7 +44,7 @@ $user = $dao->getUser($userId);
     <p class="text-center mt-0">created at <?php echo $user->getCreatedAt(); ?> </p>
 
     <div class="text-right">
-        <button type="submit" class="btn btn-info" onClick="location.href=' <?php echo '/public/edit-aboutme?id='.$userId; ?> '">編集</button>
+        <button type="submit" class="btn btn-icon-green" onClick="location.href=' <?php echo '/public/edit-aboutme?id='.$userId; ?> '">編集</button>
     </div>
 </div>
 

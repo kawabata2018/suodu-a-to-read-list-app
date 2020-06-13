@@ -11,7 +11,7 @@ $record = $toreadSearchResult[$_POST['index']];
 ?>
 
 <div class="h5 font-yumin text-center mb-4">詳細</div>
-<table class="table table-bordered table-striped custom-table mb-4">
+<table class="table table-bordered table-striped custom-table box-shadow-2 mb-4">
     <tbody>
     <tr>
         <th class="font-yumin">書名</th>
@@ -37,6 +37,6 @@ $record = $toreadSearchResult[$_POST['index']];
 </table>
 <form method="POST" action="/public/edit-reading">
     <input type="hidden" name="toreadId" value="<?php echo $record->getToreadId(); ?>">
-    <button type="submit" class="btn btn-info m-2">編集</button>
+    <button type="submit" class="btn btn-icon-navy m-2">編集</button>
     <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">閉じる</button>
 </form>

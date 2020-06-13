@@ -53,8 +53,8 @@ if (isset($_POST['submit'])) {
 
 <div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
     <div class="mx-auto col-10 col-sm-6 col-lg-4 hide-sm">
-        <div class="rounded-1 text-gray bg-white border-login">
-            <div class="container p-3 p-md-4 bg-green-login border-login">
+        <div class="rounded-1 text-gray bg-white border-login box-shadow-2">
+            <div class="container p-3 p-md-4 bg-icon-green border-login">
                 <span class="h5 font-weight-bolder">書庫に入る</span> <br>
                 <span>Login</span>
             </div>
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
                         <span class="text-danger"> <?php echo $errors['password']; ?> </span>
                         <span class="text-danger"> <?php echo $invalidPasswordError; ?> </span>
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary">入庫</button>
+                    <button type="submit" name="submit" class="btn btn-icon-navy">入庫</button>
                 </form>
 
             </div>

@@ -99,9 +99,9 @@ if (isset($_POST['submitAdd'])) {
     <p class="text-center font-yumin h4 mt-3"> 読みたい </p>
 
     <nav class="navbar">
-        <button type="button" class="btn btn-info btn-round-2 p-0 m-2 rounded-circle" data-toggle="modal" data-target="#addModal">＋</button>
+        <button type="button" class="btn btn-icon-green btn-round-2 p-0 m-2 rounded-circle" data-toggle="modal" data-target="#addModal">＋</button>
         <div class="dropdown navbar-right">
-            <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-outline-icon-green dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 並び替え
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -122,7 +122,7 @@ if (isset($_POST['submitAdd'])) {
         <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
     </div>
     <?php } else { ?>
-    <div class="border-reading-frame bg-white my-2">
+    <div class="border-reading-frame box-shadow-2 bg-white my-2">
 
         <?php foreach ($toreadSearchResult as $index=>$reading) { ?>
         <div class="border-reading-line">
@@ -142,7 +142,7 @@ if (isset($_POST['submitAdd'])) {
                                         data-currentpage="<?php echo $reading->getCurrentPage(); ?>"
                                         data-totalpage="<?php echo $reading->getTotalPage(); ?>">
                                     <div class="progress">
-                                        <div class="progress-bar bg-sucess" role="progressbar" style="width: <?php echo $reading->getProgressPct() ?>%"><?php echo $reading->getProgressPct() ?>%</div>
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $reading->getProgressPct() ?>%"><?php echo $reading->getProgressPct() ?>%</div>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@ if (isset($_POST['submitAdd'])) {
 
     <div id="addModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content bg-book">
                 <div id="appAdd" class="container p-3">
                     <h3 class="font-yumin pb-3 text-center">本を追加</h3>
                     <form method="POST">
@@ -183,7 +183,7 @@ if (isset($_POST['submitAdd'])) {
                             </div>
                             <div class="form-group col-6">
                                 <label>目標日付</label>
-                                <input type="text" name="targetDate" class="form-control">
+                                <input type="text" id="date" name="targetDate" class="form-control">
                             </div>
                         </div>
                         <div class="form-group pb-1">
@@ -199,7 +199,7 @@ if (isset($_POST['submitAdd'])) {
                                     <label for="option4" class="btn btn-success w-100">緑</label>
                             </div>
                         </div>
-                        <button type="submit" name="submitAdd" v-bind:disabled="!isValid" class="btn btn-primary">追加</button>
+                        <button type="submit" name="submitAdd" v-bind:disabled="!isValid" class="btn btn-icon-green">追加</button>
                     </form>
                 </div>
             </div>
@@ -208,7 +208,7 @@ if (isset($_POST['submitAdd'])) {
 
     <div id="progressModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myProgressModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content bg-book">
                 <div id="appProgress" class="container p-3">
                     <div class="h5 font-yumin text-center mb-4">進捗度</div>
                     <form method="POST" action="/controller/UpdateProgress-controller">
@@ -220,7 +220,7 @@ if (isset($_POST['submitAdd'])) {
                             <input type="range" id="range" name="rangeValue" class="form-control-range"
                                     min="0" max="" value="" step="1">
                         </div>
-                        <button type="submit" class="btn btn-info">更新</button>
+                        <button type="submit" class="btn btn-icon-green">更新</button>
                     </form>
                 </div>
             </div>
@@ -229,7 +229,7 @@ if (isset($_POST['submitAdd'])) {
 
     <div id="detailModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myDetailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content bg-book">
                 <div id="appDetail" class="container p-3"></div>
             </div>
         </div>

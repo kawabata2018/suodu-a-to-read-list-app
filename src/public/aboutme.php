@@ -34,7 +34,12 @@ $user = $dao->getUser($userId);
 </nav> -->
 
 <div class="container">
-    <p class="text-center font-yumin h4 mt-3"> <?php echo $user->getUserName(); ?>さんの書庫 </p>
+    <p class="text-center font-yumin h4 mt-3">
+        <?php echo $user->getUserName(); ?>さんの書庫
+        <?php if ($user->getIsProtected() == 1) { ?>
+            🔑
+        <?php } ?>
+    </p>
     <p class="text-center mt-2"> <?php echo $user->getProfile(); ?> </p>
 
     <div class="icon text-center">

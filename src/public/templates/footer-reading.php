@@ -17,6 +17,14 @@
 			}
 		}
 
+		function finishReading(num) {
+			var toreadId = parseInt(num);
+			var res = confirm('「読了」にしますか？ OKを押すと「読んだ」の本棚に移動します。');
+			if (res) {
+				location.replace('/controller/FinishReading-controller?toreadId='+toreadId);
+			}
+		}
+
 		$(function(){
 			$('#date').datepicker({
 				autoclose: true,
@@ -27,20 +35,20 @@
 		})
 
 		$('#progressModal').on('show.bs.modal', function (event) {
-			let button = $(event.relatedTarget);
-			let toreadId = parseInt(button.data('toreadid'));
-			let currentPage = parseInt(button.data('currentpage'));
-			let totalPage = parseInt(button.data('totalpage'));
-			let modal = $(this);
-			modal.find('form')[0].reset();
-			modal.find('#range').attr('value', currentPage);
-			modal.find('#range').attr('max', totalPage);
-			modal.find('#rangeMax').html("/ " + totalPage);
-			modal.find('#toreadId').val(toreadId);
+			let $button = $(event.relatedTarget);
+			let toreadId = parseInt($button.data('toreadid'));
+			let currentPage = parseInt($button.data('currentpage'));
+			let totalPage = parseInt($button.data('totalpage'));
+			let $modal = $(this);
+			$modal.find('form')[0].reset();
+			$modal.find('#range').attr('value', currentPage);
+			$modal.find('#range').attr('max', totalPage);
+			$modal.find('#rangeMax').html("/ " + totalPage);
+			$modal.find('#toreadId').val(toreadId);
 
 			// default
-			modal.find('#rangeValue').html(currentPage);
-			modal.find('#range').on('input change', function() {
+			$modal.find('#rangeValue').html(currentPage);
+			$modal.find('#range').on('input change', function() {
 				// update
 				$('#rangeValue').html($(this).val());
 			});

@@ -21,7 +21,7 @@ $dao = new ToReadDAO();
 
 // check whether or not have edit permission
 if (! $dao->checkIfAuthorized($_POST['toreadId'], $userId)) {
-    header('Location: /403#permissiondenied');
+    header('Location: /403');
     exit;
 }
 

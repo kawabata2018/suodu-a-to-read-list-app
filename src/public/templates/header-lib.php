@@ -26,7 +26,7 @@
                     <a href="<?php echo '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読みたい</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href="<?php echo '/public/library?id='.$_GET['id'] ?>" class="nav-link">読んだ</a>
+                    <a href="<?php echo '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読んだ</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
                     <a href="<?php echo '/public/aboutme?id='.$_GET['id'] ?>" class="nav-link">じぶん</a>

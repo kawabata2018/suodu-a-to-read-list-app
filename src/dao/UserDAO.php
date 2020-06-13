@@ -16,10 +16,34 @@ class UserDAO {
         $this->dbh = null;
     }
 
+
     public function userExistsOrNot($userId) {
         try {
             $this->connect();
             $sql = 'SELECT COUNT(user_id) FROM user WHERE user_id = ?';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($userId));
+            $count = (int) $stmt->fetchColumn();
+            if ($count == 0) {
+                return false;
+            } else {
+                return true;
+            }
+            $stmt = null;
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+    }
+
+    public function userPublicOrNot($userId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT COUNT(user_id) FROM user WHERE user_id = ? and is_protected = false';
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute(array($userId));
             $count = (int) $stmt->fetchColumn();

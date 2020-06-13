@@ -7,8 +7,7 @@ session_start();
 $userId = $_SESSION['user_id'];
 
 // get user id
-$toreadId = $_POST['toreadId'];
-$newCurrentPage = $_POST['rangeValue'];
+$toreadId = $_GET['toreadId'];
 
 $dao = new ToReadDAO();
 
@@ -18,11 +17,11 @@ if (! $dao->checkIfAuthorized($toreadId, $userId)) {
     exit;
 }
 
-$res = $dao->updateProgress($toreadId, $newCurrentPage);
+$res = $dao->updateToCompleted($toreadId);
 
 if ($res) {
     // echo '<br>アカウントが更新されました。';
-    header('Location: /controller/Reading-controller?sort=1&id='.$userId);
+    header('Location: /controller/Library-controller?sort=1&id='.$userId);
     exit;
 
 } else {

@@ -13,7 +13,7 @@ $userId = $_SESSION['user_id'];
 
 // definite sort types
 $sortTypes = array(
-    '0',    // order by target_date
+    '0',    // order by completed_on descent
     '1',    // order by updated_at descent
     '2',    // order by book_name
     '80',   // show only blue
@@ -40,45 +40,45 @@ $toreadDao = new ToReadDAO();
 
 switch ($sort) {
     case '0':
-        $result = $toreadDao->getAllReadingOrderByTargetDate($searchId);
+        $result = $toreadDao->getAllLibraryOrderByCompletedOn($searchId);
         $_SESSION['toread_search_result'] = $result;
-        header('Location: /public/reading?sort=0&id='.$searchId);
+        header('Location: /public/library?sort=0&id='.$searchId);
         exit;
         break;
     case '1':
-        $result = $toreadDao->getAllReadingOrderByUpdatedAt($searchId);
+        $result = $toreadDao->getAllLibraryOrderByUpdatedAt($searchId);
         $_SESSION['toread_search_result'] = $result;
-        header('Location: /public/reading?sort=1&id='.$searchId);
+        header('Location: /public/library?sort=1&id='.$searchId);
         exit;
         break;
     case '2':
-        $result = $toreadDao->getAllReadingOrderByBookName($searchId);
+        $result = $toreadDao->getAllLibraryOrderByBookName($searchId);
         $_SESSION['toread_search_result'] = $result;
-        header('Location: /public/reading?sort=2&id='.$searchId);
+        header('Location: /public/library?sort=2&id='.$searchId);
         exit;
         break;
     case '80':
-        $result = $toreadDao->getAllReadingOrderByColorTag($searchId, '0');
+        $result = $toreadDao->getAllLibraryOrderByColorTag($searchId, '0');
         $_SESSION['toread_search_result'] = $result;
-        header('Location: /public/reading?sort=80&id='.$searchId);
+        header('Location: /public/library?sort=80&id='.$searchId);
         exit;
         break;
     case '81':
-        $result = $toreadDao->getAllReadingOrderByColorTag($searchId, '1');
+        $result = $toreadDao->getAllLibraryOrderByColorTag($searchId, '1');
         $_SESSION['toread_search_result'] = $result;
-        header('Location: /public/reading?sort=81&id='.$searchId);
+        header('Location: /public/library?sort=81&id='.$searchId);
         exit;
         break;
     case '82':
-        $result = $toreadDao->getAllReadingOrderByColorTag($searchId, '2');
+        $result = $toreadDao->getAllLibraryOrderByColorTag($searchId, '2');
         $_SESSION['toread_search_result'] = $result;
-        header('Location: /public/reading?sort=82&id='.$searchId);
+        header('Location: /public/library?sort=82&id='.$searchId);
         exit;
         break;
     case '83':
-        $result = $toreadDao->getAllReadingOrderByColorTag($searchId, '3');
+        $result = $toreadDao->getAllLibraryOrderByColorTag($searchId, '3');
         $_SESSION['toread_search_result'] = $result;
-        header('Location: /public/reading?sort=83&id='.$searchId);
+        header('Location: /public/library?sort=83&id='.$searchId);
         exit;
         break;
 }

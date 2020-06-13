@@ -105,6 +105,16 @@
     border-color: #0D2E75 !important;
 }
 
+.btn-icon-red{
+    color: #fff !important;
+    background-color: #D65940 !important;
+    border-color: #D65940 !important;
+}
+.btn-icon-red:hover {
+    background-color: #B43720 !important;
+    border-color: #B43720 !important;
+}
+
 /* radio */
 .custom-radio input[type="radio"] {
     display: none !important;

@@ -39,4 +39,5 @@ $record = $toreadSearchResult[$_POST['index']];
     <input type="hidden" name="toreadId" value="<?php echo $record->getToreadId(); ?>">
     <button type="submit" class="btn btn-icon-navy m-2">編集</button>
     <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">閉じる</button>
+    <button type="button" class="btn btn-icon-red float-right m-2" onClick="finishReading(<?php echo $record->getToreadId(); ?>)">読了</button>
 </form>

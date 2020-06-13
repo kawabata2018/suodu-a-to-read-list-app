@@ -2,12 +2,41 @@
 
 // import class
 require_once 'templates/escape-func.php';
-require_once '../dao/UserDAO.php';
-require_once '../entity/User.php';
+require_once '../entity/ToRead.php';
+
+// definite sort types
+$sortTypes = array(
+    '0'  => '読了順',
+    '1'  => '更新順',
+    '2'  => '書名順',
+    '80' => '青のみ',
+    '81' => '赤のみ',
+    '82' => '黄のみ',
+    '83' => '緑のみ',
+);
+// definite color tag
+$colorTypes = array(
+    '0',    // blue
+    '1',    // red
+    '2',    // yellow
+    '3',    // green
+);
+$bookImgPath = array(
+    '0' => '/public/img/book_10.png',
+    '1' => '/public/img/book_11.png',
+    '2' => '/public/img/book_12.png',
+    '3' => '/public/img/book_13.png',
+);
 
 // get session values
 session_start();
+// if session has expired, move to login page
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /408');
+    exit;
+}
 $userId = $_SESSION['user_id'];
+$toreadSearchResult = $_SESSION['toread_search_result'];
 
 // enable utf-8
 mb_regex_encoding("UTF-8");
@@ -19,45 +48,65 @@ mb_regex_encoding("UTF-8");
 <div class="container">
     <p class="text-center font-yumin h4 mt-3"> 読んだ </p>
 
-    <div class="border-reading-frame bg-white my-3">
+    <nav class="navbar">
+        <div></div>
+        <div class="dropdown navbar-right">
+            <button class="btn btn-outline-icon-green dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                並び替え
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>"><?php echo $sortTypes['0'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=1&id='.$_GET['id'] ?>"><?php echo $sortTypes['1'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=2&id='.$_GET['id'] ?>"><?php echo $sortTypes['2'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=80&id='.$_GET['id'] ?>"><?php echo $sortTypes['80'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=81&id='.$_GET['id'] ?>"><?php echo $sortTypes['81'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=82&id='.$_GET['id'] ?>"><?php echo $sortTypes['82'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Library-controller?sort=83&id='.$_GET['id'] ?>"><?php echo $sortTypes['83'] ?></a>
+            </div>
+        </div>
+    </nav>
 
-        <?php
-        for ($i = 0; $i < 3; $i++) {
-        ?>
+    <?php if (is_null($toreadSearchResult) or (count($toreadSearchResult) == 0)) { ?>
+    <div class="text-center my-5">
+        <span class="display-1 font-yumin text-muted">空</span>
+    </div>
+    <?php } else { ?>
+    <div class="border-reading-frame box-shadow-2 bg-white my-2">
+
+        <?php foreach ($toreadSearchResult as $index=>$reading) { ?>
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
-                    <div class="col-3 col-sm-2 col-md-1 d-flex align-items-center pr-0">
-                        <img src="/public/img/book_10.png" style="width:100%; ">
+                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?php echo $index; ?>">
+                        <img src="<?php echo $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
                     </div>
-                    <div class="col-9 col-sm-10 col-md-9 col-lg-10">
-                        <div class="m-2">
-                            <span class="h5 font-yumin">完訳水滸伝（岩波文庫）</span>
-                        </div>
-                        <!-- <div class="mx-3 mt-3 mb-1">
-                            <div class="progress">
-                                <div class="progress-bar bg-sucess" role="progressbar" style="width: 66%">66%</div>
-                            </div>
-                        </div> -->
-                    </div>
-                    <div class="col-md-2 col-lg-1">
+                    <div class="col-9 col-sm-10 col-lg-11">
                         <div class="row">
-                            <div class="col-9 col-xs-10 col-md-12 d-flex align-items-center pl-4 pl-md-2 py-md-1">
-                                <!-- <span>あと10日</span> -->
+                            <div class="col-12 col-md-10">
+                                <div class="mx-2">
+                                    <span class="h5 font-yumin inline-block"><?php echo $reading->getBookName() ?></span>
+                                    <span class="font-yumin inline-block"><?php echo $reading->getAuthorName() ?></span>
+                                </div>
+                                <div class="m-2">
+                                    <span class=""><?php echo nl2br($reading->getMemo()) ?></span>
+                                </div>
                             </div>
-                            <div class="col-3 col-xs-2 col-md-12 p-2">
-                                <button class="btn-sm btn-info">詳細</button>
+                            <div class="col-12 col-md-2 pl-0">
+                                <div class="mx-2 text-right">
+                                    <span class="d-inline-block"><?php echo date('Y月n月d日', strtotime($reading->getCompletedOn())); ?></span>
+                                    <span class="d-inline-block">読了</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <?php
-        }
-        ?>
+        <?php } ?>
         
     </div>
+    <div class="font-yumin text-right pr-2"><?php echo $sortTypes[$_GET['sort']] ?></div>
+    <?php } ?>
 
 </div>
 

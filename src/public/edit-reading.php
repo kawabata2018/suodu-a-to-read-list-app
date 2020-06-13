@@ -17,18 +17,17 @@ unset($_SESSION['publish_or_not']);
 // enable utf-8
 mb_regex_encoding("UTF-8");
 
-// get toread information
-// @toread: ToRead object
 $dao = new ToReadDAO();
 
-// confirm whether or not have edit permission
-if (! $dao->checkIfAuthorized($_GET['toreadId'], $userId)) {
+// check whether or not have edit permission
+if (! $dao->checkIfAuthorized($_POST['toreadId'], $userId)) {
     header('Location: /403#permissiondenied');
     exit;
 }
 
-$toread = $dao->getToReadByToReadId($readId);
-
+// get toread information
+// @toread: ToRead object
+$toread = $dao->getToReadByToReadId($_POST['toreadId']);
 
 // if (isset($_POST['submit'])) {
 //     // check name
@@ -63,24 +62,22 @@ $toread = $dao->getToReadByToReadId($readId);
 <div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
     <div class="container p-3 p-md-4">
 
-    <!-- <form method="POST">
-        <div class="form-group pb-1">
+    <form method="POST">
+        <!-- <div class="form-group pb-1">
             <label>読者名（20字以内）</label>
-            <textarea type="text" name="name" class="form-control border-login" rows="1"><?php echo $user->getUserName(); ?></textarea>
-            <span class="text-danger"> <?php echo $errors['name']; ?> </span>
+            <textarea type="text" name="name" class="form-control border-login" rows="1"></textarea>
         </div>
         <div class="form-group pb-1">
             <label>自己紹介（100字以内）</label>
-            <textarea type="text" name="profile" class="form-control border-login" rows="4"><?php echo $user->getProfile(); ?></textarea>
-            <span class="text-danger"> <?php echo $errors['profile']; ?> </span>
+            <textarea type="text" name="profile" class="form-control border-login" rows="4"></textarea>
         </div>
         <div class="form-group custom-control custom-checkbox pb-1">
             <input type="checkbox" class="custom-control-input" id="publishOrNot" name="publishOrNot">
             <label class="custom-control-label" for="publishOrNot">自分の書庫を公開する</label>
-        </div>
-        <button type="submit" name="submit" class="btn btn-primary m-2">更新</button>
+        </div> -->
+        <!-- <button type="submit" name="submit" class="btn btn-primary m-2">更新</button> -->
         <button type="button" class="btn btn-secondary m-2" onClick="location.href=' <?php echo '/controller/Reading-controller?sort=1&id='.$userId; ?> '">戻る</button>
-    </form> -->
+    </form>
 
     </div>
 </div>

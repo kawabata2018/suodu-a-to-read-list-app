@@ -87,7 +87,7 @@
 .custom-table td, .custom-table th {
     padding-bottom: 5px;
 }
-@media (max-width: 360px) {
+@media (max-width: 767px) {
 .custom-table td, .custom-table th {
     width: 100%;
     display: block;

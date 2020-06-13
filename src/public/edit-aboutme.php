@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
         <button type="button" class="btn btn-secondary m-2" onClick="location.href=' <?php echo '/public/aboutme?id='.$userId; ?> '">戻る</button>
     </form>
     <!-- <div class="text-right">
-        <a class="text-info text-small" <?php echo 'href="/public/aboutme?id='.$userId.'"'; ?> >更新せずに戻る</a>
+        <a class="text-info text-small"<?php echo 'href="/public/aboutme?id='.$userId.'"'; ?> >更新せずに戻る</a>
     </div> -->
 
     </div>

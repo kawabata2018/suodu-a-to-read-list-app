@@ -4,12 +4,6 @@
 require_once 'templates/escape-func.php';
 require_once '../entity/ToRead.php';
 
-// if id is not set, move to own reading page
-if ((!isset($_GET['id'])) || $_GET['id']=='') {
-    header('Location: /controller/Reading-controller?sort=0&id='.$_SESSION['user_id']);
-    exit;
-}
-
 // definite sort types
 $sortTypes = array(
     '0'  => '〆切順',
@@ -34,11 +28,13 @@ $bookImgPath = array(
     '3' => '/public/img/book_03.png',
 );
 
-// declare empty array to prevent foreach null exception
-$toreadSearchResult = array();
-
 // get session values
 session_start();
+// if session has expired, move to login page
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /408');
+    exit;
+}
 $userId = $_SESSION['user_id'];
 $toreadSearchResult = $_SESSION['toread_search_result'];
 
@@ -47,6 +43,12 @@ unset($_SESSION['book_name']);
 unset($_SESSION['total_page']);
 unset($_SESSION['target_date']);
 unset($_SESSION['color_tag']);
+
+// if id is not set, move to own reading page
+if ((!isset($_GET['id'])) || $_GET['id']=='') {
+    header('Location: /controller/Reading-controller?sort=0&id='.$_SESSION['user_id']);
+    exit;
+}
 
 // enable utf-8
 mb_regex_encoding("UTF-8");
@@ -103,25 +105,31 @@ if (isset($_POST['submitAdd'])) {
                 並び替え
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?> "><?php echo $sortTypes['0'] ?></a>
-                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=1&id='.$_GET['id'] ?> "><?php echo $sortTypes['1'] ?></a>
-                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=2&id='.$_GET['id'] ?> "><?php echo $sortTypes['2'] ?></a>
-                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=80&id='.$_GET['id'] ?> "><?php echo $sortTypes['80'] ?></a>
-                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=81&id='.$_GET['id'] ?> "><?php echo $sortTypes['81'] ?></a>
-                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=82&id='.$_GET['id'] ?> "><?php echo $sortTypes['82'] ?></a>
-                <a class="dropdown-item" href=" <?php echo '/controller/Reading-controller?sort=83&id='.$_GET['id'] ?> "><?php echo $sortTypes['83'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?>"><?php echo $sortTypes['0'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=1&id='.$_GET['id'] ?>"><?php echo $sortTypes['1'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=2&id='.$_GET['id'] ?>"><?php echo $sortTypes['2'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=80&id='.$_GET['id'] ?>"><?php echo $sortTypes['80'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=81&id='.$_GET['id'] ?>"><?php echo $sortTypes['81'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=82&id='.$_GET['id'] ?>"><?php echo $sortTypes['82'] ?></a>
+                <a class="dropdown-item" href="<?php echo '/controller/Reading-controller?sort=83&id='.$_GET['id'] ?>"><?php echo $sortTypes['83'] ?></a>
             </div>
         </div>
     </nav>
 
+    <?php if (is_null($toreadSearchResult) or (count($toreadSearchResult) == 0)) { ?>
+    <p class="h5 text-muted mx-2">↑ 本を追加してね！</p>
+    <div class="icon text-center">
+        <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
+    </div>
+    <?php } else { ?>
     <div class="border-reading-frame bg-white my-2">
 
         <?php foreach ($toreadSearchResult as $index=>$reading) { ?>
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
-                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index=" <?php echo $index; ?> ">
-                        <img src=" <?php echo $bookImgPath[$reading->getColorTag()] ?> " style="width:100%; ">
+                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?php echo $index; ?>">
+                        <img src="<?php echo $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11">
                         <div class="row">
@@ -130,9 +138,9 @@ if (isset($_POST['submitAdd'])) {
                                     <span class="h5 font-yumin"><?php echo $reading->getBookName() ?></span>
                                 </div>
                                 <div class="mx-2 my-3 cursor-pointer" data-toggle="modal" data-target="#progressModal"
-                                        data-toreadid=" <?php echo $reading->getToreadId(); ?> "
-                                        data-currentpage=" <?php echo $reading->getCurrentPage(); ?> "
-                                        data-totalpage=" <?php echo $reading->getTotalPage(); ?> ">
+                                        data-toreadid="<?php echo $reading->getToreadId(); ?>"
+                                        data-currentpage="<?php echo $reading->getCurrentPage(); ?>"
+                                        data-totalpage="<?php echo $reading->getTotalPage(); ?>">
                                     <div class="progress">
                                         <div class="progress-bar bg-sucess" role="progressbar" style="width: <?php echo $reading->getProgressPct() ?>%"><?php echo $reading->getProgressPct() ?>%</div>
                                     </div>
@@ -153,6 +161,7 @@ if (isset($_POST['submitAdd'])) {
         
     </div>
     <div class="font-yumin text-right pr-2"><?php echo $sortTypes[$_GET['sort']] ?></div>
+    <?php } ?>
 
 
     <div id="addModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true">
@@ -174,7 +183,7 @@ if (isset($_POST['submitAdd'])) {
                             </div>
                             <div class="form-group col-6">
                                 <label>目標日付</label>
-                                <input type="text" name="targetDate" class="form-control" id="date">
+                                <input type="text" name="targetDate" class="form-control">
                             </div>
                         </div>
                         <div class="form-group pb-1">
@@ -221,37 +230,11 @@ if (isset($_POST['submitAdd'])) {
     <div id="detailModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myDetailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div id="appDetail" class="container p-3">
-                    <div class="h5 font-yumin text-center mb-4">詳細</div>
-                    <table class="table table-bordered table-striped custom-table">
-                        <tbody>
-                        <tr>
-                            <th class="font-yumin">書名</th>
-                            <td><?php echo $toreadSearchResult[0]->getBookName(); ?></td>
-                        </tr>
-                        <tr>
-                            <th class="font-yumin">作者名</th>
-                            <td><?php echo $toreadSearchResult[0]->getAuthorName(); ?></td>
-                        </tr>
-                        <tr>
-                            <th class="font-yumin">進捗度</th>
-                            <td><?php echo $toreadSearchResult[0]->getCurrentPage(); ?> / <?php echo $toreadSearchResult[0]->getTotalPage(); ?></td>
-                        </tr>
-                        <tr>
-                            <th class="font-yumin">目標</th>
-                            <td><?php echo $toreadSearchResult[0]->getTargetDate(); ?> まで</td>
-                        </tr>
-                        <tr>
-                            <th class="font-yumin">メモ</th>
-                            <td><?php echo $toreadSearchResult[0]->getMemo(); ?></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <div id="appDetail" class="container p-3"></div>
             </div>
         </div>
     </div>
 
 </div>
 
-<?php include('templates/footer-lib.php'); ?>
+<?php include('templates/footer-reading.php'); ?>

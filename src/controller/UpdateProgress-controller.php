@@ -11,6 +11,13 @@ $toreadId = $_POST['toreadId'];
 $newCurrentPage = $_POST['rangeValue'];
 
 $dao = new ToReadDAO();
+
+// check whether or not have edit permission
+if (! $dao->checkIfAuthorized($_POST['toreadId'], $userId)) {
+    header('Location: /403#permissiondenied');
+    exit;
+}
+
 $res = $dao->updateProgress($toreadId, $newCurrentPage);
 
 if ($res) {

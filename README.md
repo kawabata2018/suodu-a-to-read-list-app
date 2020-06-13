@@ -39,6 +39,6 @@ make init
 > https://qiita.com/dokkoisho/items/03746e58d975bd7a35ec  
 
 ### TODO
-- ~進捗度バー入力値精査~
-- ~進捗バーformリセット~
+- ~進捗バー 入力値精査~
+- ~進捗バー valueリセット処理~
 - ~セッション切れ用ページに遷移~

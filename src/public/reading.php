@@ -93,7 +93,11 @@ if (isset($_POST['submitAdd'])) {
     <p class="text-center font-yumin h4 mt-3"> 読みたい </p>
 
     <nav class="navbar">
-        <button type="button" class="btn btn-icon-green btn-round-2 p-0 m-2 rounded-circle" data-toggle="modal" data-target="#addModal">＋</button>
+        <?php if ($userId == $_GET['id']) { ?>
+            <button type="button" class="btn btn-icon-green btn-round-2 p-0 m-2 rounded-circle" data-toggle="modal" data-target="#addModal">＋</button>
+        <?php } else { ?>
+            <div></div>
+        <?php } ?>
         <div class="dropdown navbar-right">
             <button class="btn btn-outline-icon-green dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 並び替え

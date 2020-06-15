@@ -12,10 +12,11 @@ make init
 | 語言 | 類型 | 命名法 |
 |---|---|---|
 | html | name属性 | lowerCamelCase |
+| html | id属性 | lowerCamelCase |
 | php | 局部變量 | lowerCamelCase |
 | php | 類 | UpperCamelCase |
 | php | 函數 | lowerCamelCase |
-| php | session中參數 | lower_snake_case |
+| php | session參數 | lower_snake_case |
 | javascript | 變量 | lowerCamelCase |
 | sql | 變量 | lower_snake_case |
 

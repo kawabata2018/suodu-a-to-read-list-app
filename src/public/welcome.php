@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['profile'] = hescape($profile);
         $_SESSION['publish_or_not'] = hescape($publishOrNot);
         // echo 'REDIRECT';
-        header('Location: /controller/Aboutme-controller?id='.$userId);
+        header('Location: /controller/Aboutme-controller');
         exit;
     }
 }

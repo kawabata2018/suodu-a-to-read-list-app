@@ -15,6 +15,17 @@ $colorTypes = array(
 
 // get query parameters
 $toreadId = $_GET['toreadId'];
+$from = $_GET['from'];
+
+/** 
+ * check from
+ * '1': from reading
+ * '2': from library
+ * */
+if (! in_array($from, ['1', '2'])) {
+    header('Location: /404#invalidFromType');
+    exit;
+}
 
 // get session values
 session_start();
@@ -39,9 +50,18 @@ if (isset($_POST['submit'])) {
     $bookName = $_POST['bookName'];
     $authorName = $_POST['authorName'];
     $memo = $_POST['memo'];
+    $currentPage = $_POST['currentPage'];
     $totalPage = $_POST['totalPage'];
     $targetDate = $_POST['targetDate'];
     $colorTag = $_POST['colorTag'];
+
+    // check currentPage
+    if (! empty($currentPage)) {
+        if (! preg_match('/^[0-9].{0,6}$/', $currentPage)) {
+            header('Location: /500#invalidform');
+            exit;
+        }
+    }
 
     // check totalPage
     if (! empty($totalPage)) {
@@ -65,10 +85,12 @@ if (isset($_POST['submit'])) {
         exit;
     }
 
+    $_SESSION['from'] = $from;
     $_SESSION['toread_id'] = $toreadId;
     $_SESSION['book_name'] = hescape($bookName);
     $_SESSION['author_name'] = hescape($authorName);
     $_SESSION['memo'] = hescape($memo);
+    $_SESSION['current_page'] = hescape($currentPage);
     $_SESSION['total_page'] = hescape($totalPage);
     $_SESSION['target_date'] = hescape($targetDate);
     $_SESSION['color_tag'] = hescape($colorTag);
@@ -101,12 +123,17 @@ if (isset($_POST['submit'])) {
                 <span class="text-danger">{{ error.memo }}</span>
             </div>
             <div class="form-row pb-1">
-                <div class="form-group col-6">
-                    <label>ページ数</label>
+                <div class="form-group col-6 col-md-3">
+                    <label>今のページ</label>
+                    <input type="number" name="currentPage" v-model="currentPage" class="form-control" value="<?= $toread->getcurrentPage(); ?>">
+                    <span class="text-danger">{{ error.currentPage }}</span>
+                </div>
+                <div class="form-group col-6 col-md-3">
+                    <label>全ページ数</label>
                     <input type="number" name="totalPage" v-model="totalPage" class="form-control" value="<?= $toread->getTotalPage(); ?>">
                     <span class="text-danger">{{ error.totalPage }}</span>
                 </div>
-                <div class="form-group col-6">
+                <div class="form-group col-12 col-md-6">
                     <label>目標日付</label>
                     <input type="text" id="date" name="targetDate" class="form-control" value="<?= $toread->getTargetDate(); ?>">
                 </div>
@@ -115,7 +142,7 @@ if (isset($_POST['submit'])) {
                 <label>タグ</label>
                 <div class="custom-radio btn-group btn-group-toggle d-flex">
                     <input type="radio" name="colorTag" id="option1" value="0" autocomplete="off" <?= $toread->getColorTag()=='0' ? 'checked': '' ?> >
-                        <label for="option1" class="btn btn-primary w-100 active">青</label>
+                        <label for="option1" class="btn btn-primary w-100">青</label>
                     <input type="radio" name="colorTag" id="option2" value="1" autocomplete="off" <?= $toread->getColorTag()=='1' ? 'checked': '' ?> >
                         <label for="option2" class="btn btn-danger w-100">赤</label>
                     <input type="radio" name="colorTag" id="option3" value="2" autocomplete="off" <?= $toread->getColorTag()=='2' ? 'checked': '' ?> >
@@ -125,10 +152,12 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <button type="submit" name="submit" v-bind:disabled="!isValid" class="btn btn-icon-navy m-2">更新</button>
-            <button type="button" class="btn btn-secondary m-2" onClick="location.href=' <?= '/controller/Reading-controller?sort=1&id='.$userId; ?> '">戻る</button>
+            <button type="button" class="btn btn-secondary m-2"
+                    onClick="location.href=' <?= $from == '1' ? '/controller/Reading-controller?sort=1&id='.$userId : '/controller/Library-controller?sort=1&id='.$userId; ?> '">
+                    戻る</button>
             <button type="button" class="btn btn-icon-red float-right m-2" onClick="deleteToread(<?= $toreadId; ?>)">本を削除</button>
         </form>
     </div>
 </div>
 
-<?php include('templates/footer-lib.php'); ?>
+<?php include('templates/footer-toread.php'); ?>

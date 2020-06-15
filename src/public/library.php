@@ -108,6 +108,14 @@ mb_regex_encoding("UTF-8");
     <div class="font-yumin text-right pr-2"><?= $sortTypes[$_GET['sort']] ?></div>
     <?php } ?>
 
+    <div id="detailModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-book">
+                <div id="appDetail" class="container p-3"></div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <?php include('templates/footer-lib.php'); ?>

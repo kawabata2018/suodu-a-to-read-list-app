@@ -155,6 +155,33 @@ class ToReadDAO {
         return $res;
     }
 
+    public function cancelCompleted($toreadId) {
+        $res = false;
+        try {
+            $this->connect();
+            $sql = 'UPDATE toread SET is_completed = false, completed_on = NULL, updated_at = ? WHERE toread_id = ?';
+            $stmt = $this->dbh->prepare($sql);
+            $timestamp = date('Y-m-d H:i:s');
+            $flag = $stmt->execute(array($timestamp, $toreadId));
+
+            if ($flag) {
+                // echo '<br>データが更新されました';
+                $res = true;
+            } else {
+                // echo '<br>データの更新に失敗しました';
+                $res = false;
+            }
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+        return $res;
+    }
+
     public function deleteToread($toreadId) {
         $res = false;
         try {
@@ -182,21 +209,23 @@ class ToReadDAO {
         return $res;
     }
 
-    public function updateToRead($toreadId, $bookName, $authorName, $memo, $colorTag, $totalPage, $targetDate) {
+    public function updateToRead($toreadId, $bookName, $authorName, $memo, $colorTag, $currentPage, $totalPage, $targetDate) {
         $res = false;
         try {
             $this->connect();
             $sql = 'UPDATE toread
-                    SET book_name = ?, author_name = ?, memo = ?, color_tag = ?, total_page = ?, target_date = ?
+                    SET book_name = ?, author_name = ?, memo = ?, color_tag = ?,
+                        current_page = ?, total_page = ?, target_date = ?
                     WHERE toread_id = ?';
             $stmt = $this->dbh->prepare($sql);
             $stmt->bindParam(1, $bookName);
             $stmt->bindParam(2, $authorName);
             $stmt->bindParam(3, $memo);
             $stmt->bindParam(4, $colorTag);
-            $stmt->bindParam(5, $totalPage);
-            $stmt->bindParam(6, $targetDate);
-            $stmt->bindParam(7, $toreadId);
+            $stmt->bindParam(5, $currentPage);
+            $stmt->bindParam(6, $totalPage);
+            $stmt->bindParam(7, $targetDate);
+            $stmt->bindParam(8, $toreadId);
             $flag = $stmt->execute();
 
             if ($flag) {
@@ -362,7 +391,7 @@ class ToReadDAO {
             $this->connect();
             $sql = 'SELECT toread_id, book_name, author_name, memo, color_tag, total_page, current_page, completed_on FROM toread
                     WHERE user_id = ? AND is_completed = true AND delete_flag = false
-                    ORDER BY completed_on';
+                    ORDER BY completed_on DESC';
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute(array($searchId));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -467,7 +496,7 @@ class ToReadDAO {
             $this->connect();
             $sql = 'SELECT toread_id, book_name, author_name, memo, color_tag, total_page, current_page, completed_on FROM toread
                     WHERE user_id = ? AND color_tag = ? AND is_completed = true AND delete_flag = false
-                    ORDER BY completed_on';
+                    ORDER BY completed_on DESC';
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute(array($searchId, $colorTag));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

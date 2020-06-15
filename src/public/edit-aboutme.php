@@ -16,11 +16,6 @@ unset($_SESSION['name']);
 unset($_SESSION['profile']);
 unset($_SESSION['publish_or_not']);
 
-// confirm whether or not signed in
-if ($_GET['id'] == '' or $userId != $_GET['id']) {
-    header('Location: /public/aboutme?id='.$userId);
-}
-
 // enable utf-8
 mb_regex_encoding("UTF-8");
 
@@ -51,7 +46,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['profile'] = hescape($profile);
         $_SESSION['publish_or_not'] = hescape($publishOrNot);
         // echo 'REDIRECT';
-        header('Location: /controller/Aboutme-controller?id='.$userId);
+        header('Location: /controller/Aboutme-controller');
         exit;
     }
 }
@@ -77,8 +72,8 @@ if (isset($_POST['submit'])) {
             <!-- <div class="form-group pb-1">
                 <label class="text-muted">アイコン選択（coming soon ...）</label>
             </div> -->
-            <div class="form-group custom-control custom-checkbox pb-1">
-                <input type="checkbox" class="custom-control-input" id="publishOrNot" name="publishOrNot">
+            <div class="form-group custom-control custom-switch pb-1">
+                <input type="checkbox" class="custom-control-input" id="publishOrNot" name="publishOrNot" <?= $user->getIsProtected() == '0' ? 'checked': '' ?> >
                 <label class="custom-control-label" for="publishOrNot">自分の書庫を公開する</label>
             </div>
             <button type="submit" name="submit" class="btn btn-icon-navy m-2">更新</button>

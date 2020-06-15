@@ -19,7 +19,13 @@ $userId = $_SESSION['user_id'];
 // get account information
 // @user: User object
 $dao = new UserDAO();
-$user = $dao->getUser($userId);
+
+$searchId = $_GET['id'];
+$res = $dao->userPublicOrNot($searchId);
+if (! $res) {
+    $searchId = $userId;
+}
+$user = $dao->getUser($searchId);
 
 ?>
 
@@ -40,9 +46,11 @@ $user = $dao->getUser($userId);
 
     <p class="text-center mt-0">joined at <?= $user->getCreatedAt(); ?> </p>
 
-    <div class="text-right">
-        <button type="submit" class="btn btn-icon-green" onClick="location.href='/public/edit-aboutme'">編集</button>
-    </div>
+    <?php if ($searchId == $userId) { ?>
+        <div class="text-right">
+            <button type="submit" class="btn btn-icon-green" onClick="location.href='/public/edit-aboutme'">編集</button>
+        </div>
+    <?php } ?>
 </div>
 
 <?php include('templates/footer-lib.php'); ?>

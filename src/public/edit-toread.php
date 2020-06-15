@@ -29,6 +29,11 @@ if (! in_array($from, ['1', '2'])) {
 
 // get session values
 session_start();
+// if session has expired, move to login page
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /408');
+    exit;
+}
 $userId = $_SESSION['user_id'];
 
 // enable utf-8

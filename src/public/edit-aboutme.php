@@ -9,6 +9,11 @@ $errors = array('name'=>'', 'profile'=>'');
 
 // get session values
 session_start();
+// if session has expired, move to login page
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /408');
+    exit;
+}
 $userId = $_SESSION['user_id'];
 
 // unset session values

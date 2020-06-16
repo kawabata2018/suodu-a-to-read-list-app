@@ -1,17 +1,5 @@
-.brand {
-    background: #7A4C43 !important;
-}
-
 .text-brand {
     color: #7A4C43 !important;
-}
-
-.font-yumin {
-    font-family: "游明朝", "Yu Mincho", "YuMincho", serif !important;
-}
-
-.text-small {
-    font-size: 0.8rem !important;
 }
 
 .icon img {
@@ -21,39 +9,138 @@
     padding: 10px;
 }
 
+.font-yumin {
+    font-family: "游明朝", "游明朝体", "Yu Mincho", "YuMincho", serif !important;
+}
+
+.text-small {
+    font-size: 0.8rem !important;
+}
+
+.box-shadow-2 {
+    box-shadow: 2px 2px 4px gray !important;
+}
+
 .cursor-pointer {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
+/* background */
 .bg-book {
-    background: #F5F2ED;
+    background: #F5F2ED !important;
 }
 
-.bg-green-login {
-    background: #86C215;
+.bg-icon-green {
+    background: #86C215 !important;
+}
+.bg-icon-red {
+    background: #D65940 !important;
+}
+.bg-icon-navy {
+    background: #0D2E75 !important;
+}
+.bg-icon-brown {
+    background: #7A4C43 !important;
 }
 
 .bg-green-navbar {
     background: #A8E437;
 }
 
-.bg-red-login {
-    background: #D65940;
-}
-
 .bg-beige-login {
     background: #D9CFBA;
+}
+
+/* border */
+.border-navbar {
+    border-bottom: 0.1rem solid #7A4C43;
 }
 
 .border-login {
     border: 1px solid #7A4C43;
 }
 
-.border-navbar {
-    border-bottom: 0.1rem solid #7A4C43;
+.border-reading-line {
+    border-bottom: 0.5px solid #7A4C43;
+}
+.border-reading-frame {
+    border: 2px solid #7A4C43;
 }
 
+/* button */
 .btn-round-2 {
-    width: 2rem;
-    height: 2rem;
+    width: 30px;
+    height: 30px;
+}
+
+.btn-icon-green {
+    color: #fff !important;
+    background-color: #75B104 !important;
+    border: 1.25px solid #7A4C43 !important;
+    box-shadow: 1px 1px 2px gray !important;
+}
+.btn-icon-green:hover {
+    background-color: #539002 !important;
+    /* border-color: #539002 !important; */
+}
+
+.btn-outline-icon-green {
+    color: #539002 !important;
+    border-color: #539002 !important;
+    box-shadow: 1px 1px 2px gray !important;
+}
+.btn-outline-icon-green:hover {
+    color: #fff !important;
+    background-color: #75B104 !important;
+    border: 1.25px solid #7A4C43 !important;
+}
+
+.btn-icon-navy {
+    color: #fff !important;
+    background-color: #2F4F97 !important;
+    border-color: #2F4F97 !important;
+}
+.btn-icon-navy:hover {
+    background-color: #0D2E75 !important;
+    border-color: #0D2E75 !important;
+}
+
+.btn-icon-red{
+    color: #fff !important;
+    background-color: #D65940 !important;
+    border-color: #D65940 !important;
+}
+.btn-icon-red:hover {
+    background-color: #B43720 !important;
+    border-color: #B43720 !important;
+}
+
+/* radio */
+.custom-radio input[type="radio"] {
+    display: none !important;
+}
+.custom-radio label {
+    border: 0.2px #000 solid !important;
+}
+.custom-radio input[type="radio"]:not(:checked) + label {
+    background-color: #CCC !important;
+    color: #555 !important;
+}
+
+/* table */
+.custom-table tbody{
+    border: 2px solid #7A4C43;
+}
+.custom-table th {
+    background-color: #A8E437;
+    width: 30%;
+}
+.custom-table td, .custom-table th {
+    padding-bottom: 5px;
+}
+@media (max-width: 767px) {
+.custom-table td, .custom-table th {
+    width: 100%;
+    display: block;
+}
 }

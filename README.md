@@ -1,6 +1,9 @@
 # suodu-a-to-read-list-app
 讀書管理網站「所讀」（正在努力開發中）
 
+### 版本
+- Release version 1.0
+
 ### How to get started
 ```
 git clone https://github.com/kawabata2018/suodu-a-to-read-list-app.git
@@ -11,10 +14,13 @@ make init
 ### 變量命名規則
 | 語言 | 類型 | 命名法 |
 |---|---|---|
+| html | name属性 | lowerCamelCase |
+| html | id属性 | lowerCamelCase |
 | php | 局部變量 | lowerCamelCase |
 | php | 類 | UpperCamelCase |
 | php | 函數 | lowerCamelCase |
-| php | session等中參數 | lower_snake_case |
+| php | session參數 | lower_snake_case |
+| javascript | 變量 | lowerCamelCase |
 | sql | 變量 | lower_snake_case |
 
 - 用戶未登錄時使用 `$_SESSION['id']`
@@ -35,3 +41,8 @@ make init
 - 關於 `httpd.conf`
 > https://qiita.com/non0311/items/1114f080603d9007b1c4  
 > https://qiita.com/dokkoisho/items/03746e58d975bd7a35ec  
+
+### TODO
+- ~進捗バー 入力値精査~
+- ~進捗バー valueリセット処理~
+- ~セッション切れ用ページに遷移~

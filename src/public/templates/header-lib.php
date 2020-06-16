@@ -1,17 +1,3 @@
-<?php
-
-// get session values
-session_start();
-$userId = $_SESSION['user_id'];
-
-// confirm whether or not signed in
-if ($_GET['id'] == '' or $userId != $_GET['id']) {
-    header('Location: /public/login');
-    exit;
-}
-
-?>
-
 <!DOCTYPE html>
 
 <head>
@@ -19,8 +5,10 @@ if ($_GET['id'] == '' or $userId != $_GET['id']) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/public/css/style.css">
+	<link rel="stylesheet" href="/public/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+
 <body class="bg-book">
     <nav class="navbar navbar-fixed-top navbar-expand-md navbar-light flex-md-row bg-white border-navbar z-depth-0">
 
@@ -35,13 +23,13 @@ if ($_GET['id'] == '' or $userId != $_GET['id']) {
         <div class="collapse navbar-collapse" id="Mydropdown">
             <ul class="nav navbar-nav flex-row-md ml-auto">
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href=" <?php echo '/public/reading?id='.$userId ?> " class="nav-link">読みたい</a>
+                    <a href="<?= '/controller/Reading-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読みたい</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href=" <?php echo '/public/library?id='.$userId ?> " class="nav-link">読んだ</a>
+                    <a href="<?= '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読んだ</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href=" <?php echo '/public/aboutme?id='.$userId ?> " class="nav-link">じぶん</a>
+                    <a href="<?= '/public/aboutme?id='.$_GET['id'] ?>" class="nav-link">じぶん</a>
                 </li>
                 <li onClick="signOut()" class="nav-item pl-md-5 pr-md-2 cursor-pointer ">
                     <a class="nav-link" >ログアウト</a>

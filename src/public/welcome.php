@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['profile'] = hescape($profile);
         $_SESSION['publish_or_not'] = hescape($publishOrNot);
         // echo 'REDIRECT';
-        header('Location: /controller/Aboutme-controller?id='.$userId);
+        header('Location: /controller/Aboutme-controller');
         exit;
     }
 }
@@ -59,8 +59,8 @@ if (isset($_POST['submit'])) {
             <p class="h4 font-weight-bolder">登録完了！</p>
             <p>あなただけの書庫ができあがりました</p>
         </div>
-        <div class="rounded-1 bg-white border-login">
-            <div class="container p-3 p-md-4 bg-red-login border-login">
+        <div class="rounded-1 bg-white border-login box-shadow-2">
+            <div class="container p-3 p-md-4 bg-icon-red border-login">
                 <span class="h5 font-weight-bolder">プロフィール登録</span> <br>
                 <!-- <span>Sign up</span> -->
             </div>
@@ -70,12 +70,12 @@ if (isset($_POST['submit'])) {
                 <div class="form-group pb-1">
                     <label>読者名（20字以内）</label>
                     <textarea type="text" name="name" class="form-control border-login" rows="1" placeholder="よみむし"></textarea>
-                    <span class="text-danger"> <?php echo $errors['name']; ?> </span>
+                    <span class="text-danger"> <?= $errors['name']; ?> </span>
                 </div>
                 <div class="form-group pb-1">
                     <label>自己紹介（100字以内）</label>
                     <textarea type="text" name="profile" class="form-control border-login" rows="4" placeholder="よみむしくんは本の虫"></textarea>
-                    <span class="text-danger"> <?php echo $errors['profile']; ?> </span>
+                    <span class="text-danger"> <?= $errors['profile']; ?> </span>
                 </div>
                 <!-- <div class="form-group pb-1">
                     <label class="text-muted">アイコン選択（coming soon ...）</label>
@@ -84,13 +84,13 @@ if (isset($_POST['submit'])) {
                     <input type="checkbox" class="custom-control-input" id="publishOrNot" name="publishOrNot">
                     <label class="custom-control-label" for="publishOrNot">自分の書庫を公開する</label>
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">登録</button>
+                <button type="submit" name="submit" class="btn btn-icon-navy">登録</button>
             </form>
 
             </div>
             <div class="container p-3 p-md-4 bg-beige-login border-login">
                 <span class="d-inline-block">プロフィール登録はスキップできます</span>
-                <span class="d-inline-block"><a href="<?php echo '/public/aboutme?id='.$userId; ?> ">あとで</a></span>
+                <span class="d-inline-block"><a href="<?= '/public/aboutme?id='.$userId; ?>">あとで</a></span>
             </div>
         </div>
     </div>

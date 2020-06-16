@@ -6,21 +6,21 @@ require_once '../entity/User.php';
 
 class UserDAO {
     // connect to database
-    private $man;
     private $dbh;
 
     public function connect() {
-        $this->man = new DBManager();
-        $this->dbh = $this->man->getConnection();
+        $this->dbh = DBManager::getConnection();
     }
 
     public function close() {
         $this->dbh = null;
     }
 
+
     public function userExistsOrNot($userId) {
         try {
-            $sql = 'SELECT COUNT(*) FROM user WHERE user_id = ?';
+            $this->connect();
+            $sql = 'SELECT COUNT(user_id) FROM user WHERE user_id = ?';
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute(array($userId));
             $count = (int) $stmt->fetchColumn();
@@ -35,11 +35,37 @@ class UserDAO {
             // echo '<br>DB処理でエラーが発生しました';
             header('Location: /500#db');
             exit;
+        } finally {
+            $this->close();
+        }
+    }
+
+    public function userPublicOrNot($userId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT COUNT(user_id) FROM user WHERE user_id = ? and is_protected = false';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($userId));
+            $count = (int) $stmt->fetchColumn();
+            if ($count == 0) {
+                return false;
+            } else {
+                return true;
+            }
+            $stmt = null;
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
         }
     }
 
     public function getPassword($userId) {
         try {
+            $this->connect();
             $sql = 'SELECT password FROM user WHERE user_id = ?';
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute(array($userId));
@@ -57,11 +83,14 @@ class UserDAO {
             // echo '<br>DB処理でエラーが発生しました';
             header('Location: /500#db');
             exit;
+        } finally {
+            $this->close();
         }
     }
 
     public function getUser($userId) {
         try {
+            $this->connect();
             $sql = 'SELECT * FROM user WHERE user_id = ?';
             $stmt = $this->dbh->prepare($sql);
             $stmt->execute(array($userId));
@@ -83,6 +112,8 @@ class UserDAO {
             // echo '<br>DB処理でエラーが発生しました';
             header('Location: /500#db');
             exit;
+        } finally {
+            $this->close();
         }
         return $user;
     }
@@ -90,6 +121,7 @@ class UserDAO {
     public function createUser($userId, $password) {
         $res = false;
         try {
+            $this->connect();
             $sql = 'INSERT INTO user(user_id, password, created_at) VALUES(?,?,?)';
             $stmt = $this->dbh->prepare($sql);
             $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -108,6 +140,8 @@ class UserDAO {
             // echo '<br>DB処理でエラーが発生しました';
             header('Location: /500#db');
             exit;
+        } finally {
+            $this->close();
         }
         return $res;
     }
@@ -115,7 +149,8 @@ class UserDAO {
     public function updateUserWelcome($userId, $userName, $profile, $isProtected) {
         $res = false;
         try {
-            $sql = 'UPDATE user SET user_name=?, profile=?, `is_protected`=? WHERE user_id=?';
+            $this->connect();
+            $sql = 'UPDATE user SET user_name = ?, profile = ?, `is_protected` = ? WHERE user_id = ?';
             $stmt = $this->dbh->prepare($sql);
             $stmt->bindParam(1, $userName);
             $stmt->bindParam(2, $profile);
@@ -135,6 +170,8 @@ class UserDAO {
             // echo '<br>DB処理でエラーが発生しました';
             header('Location: /500#db');
             exit;
+        } finally {
+            $this->close();
         }
         return $res;
     }

@@ -56,8 +56,8 @@ if (isset($_POST['submit'])) {
 
 <div class="mt-5 mb-5 d-md-flex flex-items-center gutter-md-spacious">
     <div class="mx-auto col-10 col-sm-6 col-lg-4 hide-sm">
-        <div class="rounded-1 bg-white border-login">
-            <div class="container p-3 p-md-4 bg-red-login border-login">
+        <div class="rounded-1 bg-white border-login box-shadow-2">
+            <div class="container p-3 p-md-4 bg-icon-red border-login">
                 <span class="h5 font-weight-bolder">書庫をつくる</span> <br>
                 <span>Sign up</span>
             </div>
@@ -66,21 +66,21 @@ if (isset($_POST['submit'])) {
             <form method="POST">
                 <div class="form-group pb-1">
                     <label>読者ID（英数4-12文字）<span class="text-small">*IDは変更できません</span> </label>
-                    <input type="text" name="id" class="form-control border-login" placeholder="yomi64"></input>
-                    <span class="text-danger"> <?php echo $errors['id']; ?> </span>
-                    <span class="text-danger"> <?php echo $userExistsError; ?> </span>
+                    <input type="text" name="id" class="form-control border-login" placeholder=""></input>
+                    <span class="text-danger"> <?= $errors['id']; ?> </span>
+                    <span class="text-danger"> <?= $userExistsError; ?> </span>
                 </div>
                 <div class="form-group pb-1">
                     <label>あいことば（英数4-12文字）</label>
-                    <input type="password" name="password1" class="form-control border-login" placeholder="******"></input>
-                    <span class="text-danger"> <?php echo $errors['password1']; ?> </span>
+                    <input type="password" name="password1" class="form-control border-login" placeholder=""></input>
+                    <span class="text-danger"> <?= $errors['password1']; ?> </span>
                 </div>
                 <div class="form-group pb-5">
                     <label>あいことば（確認）</label>
-                    <input type="password" name="password2" class="form-control border-login" placeholder="******"></input>
-                    <span class="text-danger"> <?php echo $errors['password2']; ?> </span>
+                    <input type="password" name="password2" class="form-control border-login" placeholder=""></input>
+                    <span class="text-danger"> <?= $errors['password2']; ?> </span>
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">登録</button>
+                <button type="submit" name="submit" class="btn btn-icon-navy">登録</button>
             </form>
 
             </div>

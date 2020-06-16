@@ -107,6 +107,31 @@ class ToRead {
     public function getDeleteFlag(){
         return $this->deleteFlag;
     }
+    public function getProgressPct() {
+        // return int (0-100)
+        return floor(100 * $this->currentPage / $this->totalPage);
+    }
+    /**
+     * method to get the days between target date and today
+     * return non-negative integer
+     */
+    public function getDaysDiff() {
+        $today = date('Y-m-d');
+        $day1 = new DateTime($this->targetDate);
+        $day2 = new DateTime($today);
+        $diff = $day1->diff($day2);
+        return $diff->days;
+    }
+    /**
+     * method to get whether or not overdue
+     * return true if overdue else false
+     */
+    public function getIsOverDue() {
+        $today = date('Y-m-d');
+        $day1 = new DateTime($this->targetDate);
+        $day2 = new DateTime($today);
+        return ($day1<$day2);
+    }
 
 }
 

@@ -1,6 +1,9 @@
 # suodu-a-to-read-list-app
 讀書管理網站「所讀」（正在努力開發中）
 
+### 版本
+- Release version 1.0
+
 ### How to get started
 ```
 git clone https://github.com/kawabata2018/suodu-a-to-read-list-app.git

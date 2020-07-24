@@ -116,11 +116,22 @@ if (isset($_POST['submitAdd'])) {
     </nav>
 
     <?php if (is_null($toreadSearchResult) or (count($toreadSearchResult) == 0)) { ?>
-    <p class="h5 text-muted mx-2">↑ 本を追加してね！</p>
-    <div class="icon text-center">
-        <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
-    </div>
+        <?php if ($_GET['id'] == $userId) { ?>
+
+        <p class="h5 text-muted mx-2">↑ 本を追加してね！</p>
+        <div class="icon text-center">
+            <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
+        </div>
+        
+        <?php } else { ?>
+
+        <div class="text-center my-5">
+            <span class="display-1 font-yumin text-muted">空</span>
+        </div>
+
+        <?php } ?>
     <?php } else { ?>
+
     <div class="border-reading-frame box-shadow-2 bg-white my-2">
 
         <?php foreach ($toreadSearchResult as $index=>$toread) { ?>
@@ -156,6 +167,7 @@ if (isset($_POST['submitAdd'])) {
                 </div>
             </div>
         </div>
+
         <?php } ?>
         
     </div>

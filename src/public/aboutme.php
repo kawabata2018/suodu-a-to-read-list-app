@@ -1,7 +1,6 @@
 <?php
 
 // import class
-require_once '../dao/UserDAO.php';
 require_once '../entity/User.php';
 
 // enable utf-8
@@ -15,17 +14,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 $userId = $_SESSION['user_id'];
-
-// get account information
-// @user: User object
-$dao = new UserDAO();
-
-$searchId = $_GET['id'];
-$res = $dao->userPublicOrNot($searchId);
-if (! $res) {
-    $searchId = $userId;
-}
-$user = $dao->getUser($searchId);
+$userInfo = $_SESSION['user_info'];
 
 ?>
 
@@ -33,20 +22,20 @@ $user = $dao->getUser($searchId);
 
 <div class="container">
     <p class="text-center font-yumin h4 mt-3">
-        <?= $user->getUserName(); ?>さんの書庫
-        <?php if ($user->getIsProtected() == 1) { ?>
+        <?= $userInfo->getUserName(); ?>さんの書庫
+        <?php if ($userInfo->getIsProtected() == 1) { ?>
             🔑
         <?php } ?>
     </p>
-    <p class="text-center mt-2"> <?= $user->getProfile(); ?> </p>
+    <p class="text-center mt-2"> <?= $userInfo->getProfile(); ?> </p>
 
     <div class="icon text-center">
         <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
     </div>
 
-    <p class="text-center mt-0">joined at <?= $user->getCreatedAt(); ?> </p>
+    <p class="text-center mt-0">joined at <?= $userInfo->getCreatedAt(); ?> </p>
 
-    <?php if ($searchId == $userId) { ?>
+    <?php if ($_GET['id'] == $userId) { ?>
         <div class="text-right">
             <button type="submit" class="btn btn-icon-green" onClick="location.href='/public/edit-aboutme'">編集</button>
         </div>

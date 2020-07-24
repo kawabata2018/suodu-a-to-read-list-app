@@ -2,7 +2,7 @@
 讀書管理網站「所讀」（正在努力開發中）
 
 ### 版本
-- Release version 1.0
+- Release version 1.0 (2020-06-16)
 
 ### How to get started
 ```
@@ -41,8 +41,3 @@ make init
 - 關於 `httpd.conf`
 > https://qiita.com/non0311/items/1114f080603d9007b1c4  
 > https://qiita.com/dokkoisho/items/03746e58d975bd7a35ec  
-
-### TODO
-- ~進捗バー 入力値精査~
-- ~進捗バー valueリセット処理~
-- ~セッション切れ用ページに遷移~

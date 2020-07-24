@@ -123,32 +123,32 @@ if (isset($_POST['submitAdd'])) {
     <?php } else { ?>
     <div class="border-reading-frame box-shadow-2 bg-white my-2">
 
-        <?php foreach ($toreadSearchResult as $index=>$reading) { ?>
+        <?php foreach ($toreadSearchResult as $index=>$toread) { ?>
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
                     <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?= $index; ?>">
-                        <img src="<?= $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
+                        <img src="<?= $bookImgPath[$toread->getColorTag()] ?>" style="width:100%; ">
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11">
                         <div class="row">
                             <div class="col-12 col-md-10">
                                 <div class="mx-2">
-                                    <span class="h5 font-yumin"><?= $reading->getBookName() ?></span>
+                                    <span class="h5 font-yumin"><?= $toread->getBookName() ?></span>
                                 </div>
                                 <div class="mx-2 my-3 cursor-pointer" data-toggle="modal" data-target="#progressModal"
-                                        data-toreadid="<?= $reading->getToreadId(); ?>"
-                                        data-currentpage="<?= $reading->getCurrentPage(); ?>"
-                                        data-totalpage="<?= $reading->getTotalPage(); ?>">
+                                        data-toreadid="<?= $toread->getToreadId(); ?>"
+                                        data-currentpage="<?= $toread->getCurrentPage(); ?>"
+                                        data-totalpage="<?= $toread->getTotalPage(); ?>">
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: <?= $reading->getProgressPct() ?>%"><?= $reading->getProgressPct() ?>%</div>
+                                        <div class="progress-bar" role="progressbar" style="width: <?= $toread->getProgressPct() ?>%"><?= $toread->getProgressPct() ?>%</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-2 pl-0">
                                 <div class="mx-2 text-right">
-                                    <span class="d-inline-block"><?= $reading->getIsOverdue()==true ? '超過': 'あと'; ?></span>
-                                    <span class="d-inline-block"><?= $reading->getDaysDiff(); ?>日</span>
+                                    <span class="d-inline-block"><?= $toread->getIsOverdue()==true ? '超過': 'あと'; ?></span>
+                                    <span class="d-inline-block"><?= $toread->getDaysDiff(); ?>日</span>
                                 </div>
                             </div>
                         </div>

@@ -36,6 +36,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 $userId = $_SESSION['user_id'];
+$userName = $_SESSION['user_name'];
 $toreadSearchResult = $_SESSION['toread_search_result'];
 
 // enable utf-8
@@ -46,7 +47,7 @@ mb_regex_encoding("UTF-8");
 <?php include('templates/header-lib.php'); ?>
 
 <div class="container">
-    <p class="text-center font-yumin h4 mt-3"> 読んだ </p>
+    <p class="text-center font-yumin h4 mt-3"> <?= $userName ?>さんの読んだ </p>
 
     <nav class="navbar">
         <div></div>

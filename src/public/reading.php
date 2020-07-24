@@ -36,6 +36,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 $userId = $_SESSION['user_id'];
+$userName = $_SESSION['user_name'];
 $toreadSearchResult = $_SESSION['toread_search_result'];
 
 // if id is not set, move to own reading page
@@ -47,7 +48,7 @@ if ((!isset($_GET['id'])) || $_GET['id']=='') {
 // enable utf-8
 mb_regex_encoding("UTF-8");
 
-// when submitted on modal window
+// when submitted on add modal window
 if (isset($_POST['submitAdd'])) {
     $bookName = $_POST['bookName'];
     $totalPage = $_POST['totalPage'];
@@ -90,7 +91,7 @@ if (isset($_POST['submitAdd'])) {
 <?php include('templates/header-lib.php'); ?>
 
 <div class="container">
-    <p class="text-center font-yumin h4 mt-3"> 読みたい </p>
+    <p class="text-center font-yumin h4 mt-3"> <?= $userName ?>さんの読みたい </p>
 
     <nav class="navbar">
         <?php if ($userId == $_GET['id']) { ?>

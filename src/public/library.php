@@ -36,6 +36,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 $userId = $_SESSION['user_id'];
+$userName = $_SESSION['user_name'];
 $toreadSearchResult = $_SESSION['toread_search_result'];
 
 // enable utf-8
@@ -46,7 +47,7 @@ mb_regex_encoding("UTF-8");
 <?php include('templates/header-lib.php'); ?>
 
 <div class="container">
-    <p class="text-center font-yumin h4 mt-3"> 読んだ </p>
+    <p class="text-center font-yumin h4 mt-3"> <?= $userName ?>さんの読んだ </p>
 
     <nav class="navbar">
         <div></div>
@@ -73,27 +74,27 @@ mb_regex_encoding("UTF-8");
     <?php } else { ?>
     <div class="border-reading-frame box-shadow-2 bg-white my-2">
 
-        <?php foreach ($toreadSearchResult as $index=>$reading) { ?>
+        <?php foreach ($toreadSearchResult as $index=>$toread) { ?>
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
                     <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?= $index; ?>">
-                        <img src="<?= $bookImgPath[$reading->getColorTag()] ?>" style="width:100%; ">
+                        <img src="<?= $bookImgPath[$toread->getColorTag()] ?>" style="width:100%; ">
                     </div>
                     <div class="col-9 col-sm-10 col-lg-11">
                         <div class="row">
                             <div class="col-12 col-md-10">
                                 <div class="mx-2">
-                                    <span class="h5 font-yumin inline-block"><?= $reading->getBookName() ?></span>
-                                    <span class="font-yumin inline-block"><?= $reading->getAuthorName() ?></span>
+                                    <span class="h5 font-yumin inline-block"><?= $toread->getBookName() ?></span>
+                                    <span class="font-yumin inline-block"><?= $toread->getAuthorName() ?></span>
                                 </div>
                                 <div class="m-2">
-                                    <span class=""><?= nl2br($reading->getMemo()) ?></span>
+                                    <span class=""><?= nl2br($toread->getMemo()) ?></span>
                                 </div>
                             </div>
                             <div class="col-12 col-md-2 pl-0">
                                 <div class="mx-2 text-right">
-                                    <span class="d-inline-block"><?= date('n月d日', strtotime($reading->getCompletedOn())); ?></span>
+                                    <span class="d-inline-block"><?= date('n月d日', strtotime($toread->getCompletedOn())); ?></span>
                                     <span class="d-inline-block">読了</span>
                                 </div>
                             </div>

@@ -1,5 +1,6 @@
 <?php
 
+require_once '../entity/User.php';
 require_once '../dao/UserDAO.php';
 require_once '../dao/ToReadDAO.php';
 
@@ -34,6 +35,9 @@ $res = $userDao->userPublicOrNot($searchId);
 if (! $res) {
     $searchId = $userId;
 }
+
+// store its username to session
+$_SESSION['user_name'] = $userDao->getName($searchId);
 
 // start searching
 $toreadDao = new ToReadDAO();

@@ -1,66 +1,48 @@
 up:
-	docker-compose up -d
+	sudo docker-compose up -d
 build:
-	docker-compose build --no-cache --force-rm
+	sudo docker-compose build --no-cache --force-rm
 init:
 	mkdir -p ./docker/php/bash/psysh
 	touch ./docker/php/bash/.bash_history
-	docker-compose up -d --build
+	sudo docker-compose up -d --build
 remake:
 	@make destroy
 	@make init
 stop:
-	docker-compose stop
+	sudo docker-compose stop
 down:
-	docker-compose down
+	sudo docker-compose down
 restart:
 	@make down
 	@make up
 destroy:
-	docker-compose down --rmi all --volumes
+	sudo docker-compose down --rmi all --volumes
 destroy-volumes:
-	docker-compose down --volumes
+	sudo docker-compose down --volumes
 ps:
-	docker-compose ps
+	sudo docker-compose ps
 logs:
-	docker-compose logs
+	sudo docker-compose logs
 logs-watch:
-	docker-compose logs --follow
+	sudo docker-compose logs --follow
 web:
-	docker-compose exec web ash
+	sudo docker-compose exec web ash
 app:
-	docker-compose exec app bash
-fresh:
-	docker-compose exec app php artisan migrate:fresh
-seed:
-	docker-compose exec app php artisan db:seed
-tinker:
-	docker-compose exec app php artisan tinker
-test:
-	docker-compose exec app php artisan test
-cache:
-	docker-compose exec app composer dump-autoload -o
-	docker-compose exec app php artisan optimize
-cache-clear:
-	docker-compose exec app php artisan optimize:clear
+	sudo docker-compose exec app bash
 yarn:
-	docker-compose exec web yarn
+	sudo docker-compose exec web yarn
 yarn-dev:
-	docker-compose exec web yarn run dev
+	sudo docker-compose exec web yarn run dev
 yarn-watch:
-	docker-compose exec web yarn run watch
+	sudo docker-compose exec web yarn run watch
 yarn-watch-poll:
-	docker-compose exec web yarn run watch-poll
+	sudo docker-compose exec web yarn run watch-poll
 yarn-hot:
-	docker-compose exec web yarn run hot
+	sudo docker-compose exec web yarn run hot
 db:
-	docker-compose exec db bash
+	sudo docker-compose exec db bash
 mysql:
-	docker-compose exec db bash -c 'mysql --show-warnings -u $$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE'
+	sudo docker-compose exec db bash -c 'mysql --show-warnings -u $$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE'
 redis:
-	docker-compose exec redis redis-cli
-ide-helper:
-	docker-compose exec app php artisan clear-compiled
-	docker-compose exec app php artisan ide-helper:generate
-	docker-compose exec app php artisan ide-helper:meta
-	docker-compose exec app php artisan ide-helper:models --nowrite
+	sudo docker-compose exec redis redis-cli

@@ -88,6 +88,31 @@ class UserDAO {
         }
     }
 
+    public function getName($userId) {
+        try {
+            $this->connect();
+            $sql = 'SELECT user_name FROM user WHERE user_id = ?';
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute(array($userId));
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result == false) {
+                // echo '<br>DB処理でエラーが発生しました';
+                header('Location: /500');
+                exit;
+            } else {
+                return $result['user_name'];
+            }
+            $stmt = null;
+
+        } catch (Exception $e) {
+            // echo '<br>DB処理でエラーが発生しました';
+            header('Location: /500#db');
+            exit;
+        } finally {
+            $this->close();
+        }
+    }
+
     public function getUser($userId) {
         try {
             $this->connect();

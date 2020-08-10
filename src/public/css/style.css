@@ -86,7 +86,7 @@
 
 .btn-outline-icon-green {
     color: #539002 !important;
-    border-color: #539002 !important;
+    border: 1.25px solid #539002 !important;
     box-shadow: 1px 1px 2px gray !important;
 }
 .btn-outline-icon-green:hover {

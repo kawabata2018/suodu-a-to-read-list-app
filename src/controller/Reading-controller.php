@@ -2,6 +2,7 @@
 
 require_once '../entity/User.php';
 require_once '../dao/UserDAO.php';
+require_once '../dao/RelationDAO.php';
 require_once '../dao/ToReadDAO.php';
 
 // get query parameters
@@ -31,8 +32,9 @@ if (! in_array($sort, $sortTypes)) {
 
 // check searchId
 $userDao = new UserDAO();
-$res = $userDao->userPublicOrNot($searchId);
-if (! $res) {
+$relationDao = new RelationDAO();
+$isAvailable = $relationDao->availableOrNot($userId, $searchId);
+if (! $isAvailable) {
     $searchId = $userId;
 }
 

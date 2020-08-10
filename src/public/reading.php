@@ -138,9 +138,15 @@ if (isset($_POST['submitAdd'])) {
         <div class="border-reading-line">
             <div class="container p-2 p-md-3">
                 <div class="row">
-                    <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?= $index; ?>">
-                        <img src="<?= $bookImgPath[$toread->getColorTag()] ?>" style="width:100%; ">
-                    </div>
+                    <?php if ($userId == $_GET['id']) { ?>
+                        <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer" data-toggle="modal" data-target="#detailModal" data-index="<?= $index; ?>">
+                            <img src="<?= $bookImgPath[$toread->getColorTag()] ?>" style="width:100%; ">
+                        </div>
+                    <?php } else { ?>
+                        <div class="col-3 col-sm-2 col-lg-1 pr-0 d-flex align-items-center cursor-pointer">
+                            <img src="<?= $bookImgPath[$toread->getColorTag()] ?>" style="width:100%; ">
+                        </div>
+                    <?php } ?>
                     <div class="col-9 col-sm-10 col-lg-11">
                         <div class="row">
                             <div class="col-12 col-md-10">
@@ -231,7 +237,9 @@ if (isset($_POST['submitAdd'])) {
                             <input type="range" id="range" name="rangeValue" class="form-control-range"
                                     min="0" max="" value="" step="1">
                         </div>
-                        <button type="submit" class="btn btn-icon-green">更新</button>
+                        <?php if ($userId == $_GET['id']) { ?>
+                            <button type="submit" class="btn btn-icon-green">更新</button>
+                        <?php } ?>
                     </form>
                 </div>
             </div>

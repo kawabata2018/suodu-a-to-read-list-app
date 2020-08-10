@@ -44,7 +44,13 @@ mb_regex_encoding("UTF-8");
 
 ?>
 
-<?php include('templates/header-lib.php'); ?>
+<?php
+if ($userId == $_GET['id']) {
+    include('templates/header-lib.php'); 
+} else {
+    include('templates/header-lib-alt.php'); 
+}
+?>
 
 <div class="container">
     <p class="text-center font-yumin h4 mt-3"> <?= $userName ?>さんの読んだ </p>

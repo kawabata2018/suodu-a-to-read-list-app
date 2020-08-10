@@ -19,7 +19,13 @@ $relationInfo = $_SESSION['relation_info'];
 
 ?>
 
-<?php include('templates/header-lib.php'); ?>
+<?php
+if ($userId == $_GET['id']) {
+    include('templates/header-lib.php'); 
+} else {
+    include('templates/header-lib-alt.php'); 
+}
+?>
 
 <div class="container">
     <p class="text-center font-yumin h4 mt-3">
@@ -42,13 +48,23 @@ $relationInfo = $_SESSION['relation_info'];
     <?php } ?>
     </div>
 
-    <p class="text-center mt-2"> <?= $userInfo->getProfile(); ?> </p>
+    <?php if (in_array('Following', $relationInfo)) { ?>
+        <div class="text-center">
+            <button class="btn btn-outline-icon-navy mx-4 mb-3" onClick="location.href='/controller/Reading-controller?sort=0&id=<?= $_GET['id'] ?>'">
+                読みたい
+            </button>
+            <button class="btn btn-outline-icon-navy mx-4 mb-3" onClick="location.href='/controller/Library-controller?sort=0&id=<?= $_GET['id'] ?>'">
+                読んだ
+            </button>
+        </div>
+    <?php } ?>
+
+    <p class="text-center mt-3"> <?= $userInfo->getProfile(); ?> </p>
 
     <div class="icon text-center">
         <img class="m-0" src="/public/img/yomimushi.png" alt="よみむし" />
     </div>
-
-    <p class="text-center mt-0">joined at <?= $userInfo->getCreatedAt(); ?> </p>
+    <?php /* <p class="text-center mt-0">joined at <?= $userInfo->getCreatedAt(); ?> </p> */ ?>
 
     <?php if ($_GET['id'] == $userId) { ?>
         <div class="text-right">

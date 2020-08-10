@@ -30,6 +30,10 @@
     background: #F5F2ED !important;
 }
 
+.bg-book-alt {
+    background: #EBF5F5 !important;
+}
+
 .bg-icon-green {
     background: #86C215 !important;
 }
@@ -103,6 +107,16 @@
 .btn-icon-navy:hover {
     background-color: #0D2E75 !important;
     border-color: #0D2E75 !important;
+}
+
+.btn-outline-icon-navy {
+    color: #2F4F97 !important;
+    background-color: #fff !important;
+    border: 1.5px solid #2F4F97 !important;
+}
+.btn-outline-icon-navy:hover {
+    color: #fff !important;
+    background-color: #2F4F97 !important;
 }
 
 .btn-icon-red{

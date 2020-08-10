@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['id'])) {
         $errors['id'] = 'IDを入力してね';
     } else {
-        $id = $_POST['id'];
+        $id = trim($_POST['id'], ' ');
     }
 
     // check password

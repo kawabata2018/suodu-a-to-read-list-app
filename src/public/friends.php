@@ -3,8 +3,8 @@
 // import class
 require_once 'templates/escape-func.php';
 require_once '../entity/User.php';
-require_once '../dao/UserDao.php';
-require_once '../dao/RelationDao.php';
+require_once '../dao/UserDAO.php';
+require_once '../dao/RelationDAO.php';
 
 $errors = array('searchId'=>'');
 

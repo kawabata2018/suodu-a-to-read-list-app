@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['id'])) {
         $errors['id'] = 'IDを入力してね';
     } else {
-        $id = $_POST['id'];
+        $id = trim($_POST['id'], ' ');
         if (!preg_match('/^[a-zA-Z0-9_]{4,12}$/', $id)) {
             $errors['id'] = '英数4-12文字で入力してね';
         }

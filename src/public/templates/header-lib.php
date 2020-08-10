@@ -29,7 +29,10 @@
                     <a href="<?= '/controller/Library-controller?sort=0&id='.$_GET['id'] ?>" class="nav-link">読んだ</a>
                 </li>
                 <li class="nav-item px-md-2 cursor-pointer ">
-                    <a href="<?= '/controller/Aboutme-controller?id='.$_GET['id'] ?>" class="nav-link">じぶん</a>
+                    <a href="<?= '/controller/Aboutme-controller?id='.$_GET['id'] ?>" class="nav-link">プロフィール</a>
+                </li>
+                <li class="nav-item px-md-2 cursor-pointer ">
+                    <a href="/public/friends" class="nav-link">書友をさがす</a>
                 </li>
                 <li onClick="signOut()" class="nav-item pl-md-5 pr-md-2 cursor-pointer ">
                     <a class="nav-link" >ログアウト</a>

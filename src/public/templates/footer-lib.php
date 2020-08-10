@@ -24,6 +24,40 @@
 			}
 		}
 
+		// aboutme.php
+		$('#followingBtn').on({
+			'mouseenter': function() {
+				$(this).text('フォロー解除');
+			},
+			'mouseleave': function() {
+				$(this).text('フォロー中');
+			},
+			'click': function() {
+				let res = confirm('フォローを解除しますか？');
+				if (res) {
+					let url = new URL(location);
+					let paramId = url.searchParams.get('id');
+					location.replace('/controller/Relation-controller?action=unfollow&id=' + paramId);
+				}
+			}
+		});
+		$('#requestingBtn').on({
+			'mouseenter': function() {
+				$(this).text('フォロー申請解除');
+			},
+			'mouseleave': function() {
+				$(this).text('フォロー申請中');
+			},
+			'click': function() {
+				let res = confirm('フォロー申請を解除しますか？');
+				if (res) {
+					let url = new URL(location);
+					let paramId = url.searchParams.get('id');
+					location.replace('/controller/Relation-controller?action=unfollow&id=' + paramId);
+				}
+			}
+		});
+
 		$(function(){
 			$('#date').datepicker({
 				autoclose: true,
